@@ -1,0 +1,1630 @@
+=== THEORY PDF ===
+Control Flow Statements
+Control Flow Statements
+Inst. 
+Inst. Nguyễn
+Nguyễn Minh 
+Minh Huy
+Huy
+1
+Fundamentals of Programming - Nguyễn Minh Huy
+Contents
+Contents
+ Branch statements.
+Branch statements.
+ Loop statements.
+Loop statements.
+ Basic utilities.
+Basic utilities.
+2
+Fundamentals of Programming - Nguyễn Minh Huy
+Contents
+Contents
+ Branch statements.
+Branch statements.
+ Loop statements.
+Loop statements.
+ Basic utilities.
+Basic utilities.
+3
+Fundamentals of Programming - Nguyễn Minh Huy
+Branch statements
+Branch statements
+ ifif-else statement:
+else statement:
+ Syntax:
+Syntax:
+ifif (<logic condition>
+<logic condition>)
+<Statement 1>;
+<Statement 1>;
+[else
+else
+<Statement 2>;]
+<Statement 2>;]
+Pseudo
+Pseudo-code:
+code:
+If <logic condition>
+If <logic condition>
+Statement 1
+Statement 1
+[Else
+[Else
+St t
+t 2]
+St t
+t 2]
+<logic condition>
+Statement 1
+false
+true
+Statement 2
+ Examples:
+Examples:
+// Full if
+// Full if-else
+else
+ifif (n > 0
+n > 0)
+a = a * 2;
+a = a * 2;
+else
+else
+a = a / 2;
+a = a / 2;
+4
+Fundamentals of Programming - Nguyễn Minh Huy
+Statement 2]
+Statement 2]
+Statement 1
+Statement 2
+// No else
+// No else
+ifif (n > 0
+n > 0)
+a = a * 2;
+a = a * 2;
+// Compound statement
+// Compound statement
+ifif (n > 0
+n > 0)
+{
+a = a * 2;
+a = a * 2;
+b = b + 1;
+b = b + 1;
+}
+Branch statements
+Branch statements
+ ifif-else statement:
+else statement:
+ Notes:
+Notes:
+ Logic condition encloses ( ).
+Logic condition encloses ( ).
+ Value 1: true.
+Value 1: true.
+ Value 0: false.
+Value 0: false.
+ ifif else
+else compound statement
+compound statement
+ifif n > 0
+n > 0
+// Wrong
+// Wrong
+a = a * 2;
+a = a * 2;
+if (
+if (1)
+// Always true
+// Always true
+a = a * 2;
+a = a * 2;
+ ifif-else
+else compound statement.
+compound statement.
+ No 
+No ; after 
+after ifif or 
+or else
+else.
+ ifif-else
+else can be nested.
+can be nested.
+ else
+else goes with nearest 
+goes with nearest ifif.
+5
+Fundamentals of Programming - Nguyễn Minh Huy
+if (
+if (n > 0
+n > 0) ;
+//// Wrong
+Wrong
+a = a * 2;
+a = a * 2;
+else ;
+else ;
+a = a / 2;
+a = a / 2;
+if (
+if (n > 0
+n > 0)         
+)         // Nested if
+// Nested if-else
+else
+if (
+if (a > b
+a > b)
+c = c + 1;
+c = c + 1;
+else
+else
+c = c 
+c = c – 1;
+1;
+Branch statements
+Branch statements
+ ifif-else statement:
+else statement:
+ Nested if
+Nested if-else, logic condition on the same variable:
+else, logic condition on the same variable:
+ifif (gpa
+gpa >= 8.5)
+>= 8.5)
+rank = “Excellent”;
+rank = “Excellent”;
+else
+else
+ifif (gpa
+gpa >= 7.0)
+>= 7.0)
+ifif (gpa
+gpa >= 8.5)
+>= 8.5)
+rank = “Excellent”;
+rank = “Excellent”;
+else if
+else if (gpa
+gpa >= 7.0)
+>= 7.0)
+rank = “Good”;
+rank = “Good”;
+(gp
+gp
+)
+rank = “Good”;
+rank = “Good”;
+else
+else
+ifif (gpa
+gpa >= 5.0)
+>= 5.0)
+rank = “Fair”;
+rank = “Fair”;
+else
+else
+rank = “Failed”;
+rank = “Failed”;
+6
+Fundamentals of Programming - Nguyễn Minh Huy
+rank = Good ;
+rank = Good ;
+else
+else ifif (gpa
+gpa >= 5.0)
+>= 5.0)
+rank = “Fair”;
+rank = “Fair”;
+else
+else
+rank = “Failed”; 
+rank = “Failed”; 
+Branch statements
+Branch statements
+ switch
+switch-case statement:
+case statement:
+ Syntax:
+Syntax:
+switch
+switch (<expression>
+<expression>)
+{
+[case
+case <value 1>:
+<value 1>:
+<Statement 1>;
+<Statement 1>;
+break;
+break;
+// Equivalent if
+// Equivalent if-else statement.
+else statement.
+ifif (<expression> == <value 1>)
+(<expression> == <value 1>)
+<Statement 1>;
+<Statement 1>;
+else if
+else if (<expression> == <value 2>) 
+(<expression> == <value 2>) 
+<Statement 2>;
+<Statement 2>;
+break;
+break;
+case
+case <value 2>:
+<value 2>:
+<Statement 2>;
+<Statement 2>;
+break;
+break;
+....]
+....]
+[default:
+default:
+<Statement N>;]
+<Statement N>;]
+}
+7
+Fundamentals of Programming - Nguyễn Minh Huy
+<Statement 2>;
+<Statement 2>;
+…
+else
+else
+<Statement N>; 
+<Statement N>; 
+Branch statements
+Branch statements
+ switch
+switch-case statement:
+case statement:
+switch
+switch (day_of_week
+day_of_week)
+{
+case
+case 1:
+1:
+printf
+printf(“Sunday”); 
+(“Sunday”); break;
+break;
+case
+case 2:
+2:
+printf
+printf(“Monday”); 
+(“Monday”); break;
+break;
+case
+case 3:
+3:
+printf
+printf(“Tuesday”); 
+(“Tuesday”); break;
+break;
+case
+case 4:
+4:
+printf
+printf(“Wednesday”); 
+(“Wednesday”); break;
+break;
+case
+case 5:
+5:
+printf
+printf(“Thursday”); 
+(“Thursday”); break;
+break;
+case
+case 6:
+6:
+printf
+printf(“Friday”); 
+(“Friday”); break;
+break;
+case
+case 7:
+7:
+printf
+printf(“Saturday”); 
+(“Saturday”); break;
+break;
+}
+8
+Fundamentals of Programming - Nguyễn Minh Huy
+Branch statements
+Branch statements
+ switch
+switch-case statement:
+case statement:
+ Notes:
+Notes:
+ Expression encloses ( ).
+Expression encloses ( ).
+ Value of 
+Value of case
+case:
+ Single value.
+Single value.
+ Not range value
+Not range value
+switch
+switch a + b
+a + b
+// false
+// false
+{
+…
+}
+ Not range value.
+Not range value.
+ Statement 
+Statement break
+break:
+ Exit the 
+Exit the case
+case.
+ Ignore to combine 
+Ignore to combine case
+case.
+9
+Fundamentals of Programming - Nguyễn Minh Huy
+switch (
+switch (a + b
+a + b)
+{
+case > 5:     // false
+case > 5:     // false
+…
+}
+Branch statements
+Branch statements
+ switch
+switch-case statement:
+case statement:
+switch
+switch (day_of_week
+day_of_week)
+{
+case
+case 2:
+2:
+case
+case 3:
+3:
+case
+case 4:
+4:
+case
+case 5:
+5:
+case
+case 6:
+6:
+printf
+printf(“Working day”); 
+(“Working day”); break;
+break;
+case
+case 1:
+1:
+case
+case 7:
+7:
+printf
+printf(“Weekend”); 
+(“Weekend”); break;
+break;
+default:
+default:
+printf
+printf(“Invalid day of week”);
+(“Invalid day of week”);
+}
+10
+Fundamentals of Programming - Nguyễn Minh Huy
+Contents
+Contents
+ Branch statements.
+Branch statements.
+ Loop statements.
+Loop statements.
+ Basic utilities.
+Basic utilities.
+11
+Fundamentals of Programming - Nguyễn Minh Huy
+Loop statements
+Loop statements
+ Consider the program:
+Consider the program:
+ Print integers in range [1..10].
+Print integers in range [1..10].
+ Write 10 output statements.
+Write 10 output statements.
+ Print integers in range [1..100]?
+Print integers in range [1..100]?
+ Write 100 output statements?!
+Write 100 output statements?!
+ U
+l
+t t
+t
+U
+l
+t t
+t
+ Use loop statement.
+Use loop statement.
+12
+Fundamentals of Programming - Nguyễn Minh Huy
+Loop statements
+Loop statements
+ while and do
+while and do-while statements:
+while statements:
+ Syntax:
+Syntax:
+// while statement
+// while statement
+while
+while (<Condition>)
+(<Condition>)
+<Statement>;
+<Statement>;
+// Equivalent while for do
+// Equivalent while for do while
+while
+// do
+// do-while statement
+while statement
+do
+do
+{
+<Statement>;
+<Statement>;
+} while (
+} while (<Condition>
+<Condition>););
+// Equivalent while for do
+// Equivalent while for do-while
+while
+<Statement>;
+<Statement>;
+while
+while (<Condition>)
+(<Condition>)
+<Statement>;
+<Statement>;
+13
+Fundamentals of Programming - Nguyễn Minh Huy
+<Condition>
+Statement
+true
+false
+<Condition>
+Statement
+true
+false
+} while (
+} while (<Condition>
+<Condition>););
+Loop statements
+Loop statements
+ while and do
+while and do-while statements:
+while statements:
+ Examples:
+Examples:
+// while statement.
+// while statement.
+printf
+printf(“Enter n = “);
+(“Enter n = “);
+scanf
+scanf(“%d”, &n);
+(“%d”, &n);
+i = 1;
+= 1;
+// do
+// do-while statement.
+while statement.
+printf(“Enter n = “);
+scanf(“%d”, &n); 
+i = 1;
+= 1;
+;
+while (
+while (i <= n
+<= n)
+{
+printf
+printf(“%d”, 
+(“%d”, i););
+i++;
+++;
+}
+14
+Fundamentals of Programming - Nguyễn Minh Huy
+i = 1;
+= 1;
+do
+do
+{
+printf
+printf(“%d”, 
+(“%d”, i););
+i++;
+++;
+} while (
+} while (i <= n
+<= n););
+Loop statements
+Loop statements
+ while and do
+while and do-while statements:
+while statements:
+ Notes:
+Notes:
+ Loop condition encloses ( ).
+Loop condition encloses ( ).
+ Loop often includes:
+Loop often includes:
+ Step 1: Initialize counter.
+Step 1: Initialize counter.
+ Step 2: Check condition
+Step 2: Check condition
+while
+while n > 0
+n > 0
+// false
+// false
+{
+…
+}
+ Step 2: Check condition.
+Step 2: Check condition.
+ Step 3: Execute a loop.
+Step 3: Execute a loop.
+ Step 4: Update counter.
+Step 4: Update counter.
+15
+Fundamentals of Programming - Nguyễn Minh Huy
+k = 0;
+k = 0;
+// Step 1
+// Step 1
+while (
+while (k < n
+k < n)
+// Step 2
+// Step 2
+{
+S = S * k;   // Step 3
+S = S * k;   // Step 3
+k = k + 1;   // Step 4
+k = k + 1;   // Step 4
+}
+Loop statements
+Loop statements
+ for statement:
+for statement:
+ Syntax:
+Syntax:
+for 
+for ([<Initialization>] 
+([<Initialization>] ; [<Condition>] 
+[<Condition>] ; [<Loop step>]
+[<Loop step>])
+<Statement>;
+<Statement>;
+// Equivalent while.
+// Equivalent while.
+I iti li
+ti
+<Initialization>;
+<Initialization>;
+while (
+while (<Condition>
+<Condition>)
+{
+<Statement>;
+<Statement>;
+<Loop step>;
+<Loop step>;
+}
+16
+Fundamentals of Programming - Nguyễn Minh Huy
+<Condition>
+Statement
+true
+false
+<Initialization>
+<Loop step>
+Loop statements
+Loop statements
+ for statement:
+for statement:
+ Examples:
+Examples:
+printf
+printf(“Enter n = “);
+(“Enter n = “);
+scanf
+scanf(“%d”, &n);
+(“%d”, &n);
+// Full for.
+// Full for.
+for (
+for (i = 1; 
+= 1; i <= n; 
+<= n; i++
+++)
+printf
+printf(“Enter n = “);
+(“Enter n = “);
+scanf
+scanf(“%d”, &n);
+(“%d”, &n);
+// No initialization.
+// No initialization.
+i = 1;
+= 1;
+printf
+printf(“Enter n = “);
+(“Enter n = “);
+scanf
+scanf(“%d”, &n);
+(“%d”, &n);
+// No loop step.
+// No loop step.
+i = 1;
+= 1;
+(
+;
+;
+)
+printf
+printf(“%d”, 
+(“%d”, i););
+17
+Fundamentals of Programming - Nguyễn Minh Huy
+i = 1;
+= 1;
+for ( 
+for ( ; ; i <= n; 
+<= n; i++
+++)
+printf
+printf(“%d”, 
+(“%d”, i););
+i = 1;
+= 1;
+for ( 
+for ( ; ; i <= n; 
+<= n; )
+{
+printf
+printf(“%d”, 
+(“%d”, i););
+i++;
+++;
+}
+Loop statements
+Loop statements
+ break and continue statements:
+break and continue statements:
+ break:
+break:
+ Exit the current loop.
+Exit the current loop.
+ Use with 
+Use with ifif-else
+else for exit condition.
+for exit condition.
+ continue:
+continue:
+Ski
+th
+t l
+ti
+Ski
+th
+t l
+ti
+printf
+printf(“Enter n = “);
+(“Enter n = “);
+scanf
+scanf(“%d”, &n);
+(“%d”, &n);
+for (
+for (i = 1;  ; 
+= 1;  ; i++
+++)
+{
+if (
+if (i > n)
+> n)
+ Skip the current loop one time.
+Skip the current loop one time.
+ Use with 
+Use with ifif-else 
+else for skip condition.
+for skip condition.
+18
+Fundamentals of Programming - Nguyễn Minh Huy
+(
+)
+break;
+break;
+if (
+if (i % 2 == 0)
+% 2 == 0)
+continue;
+continue;
+printf
+printf(“%d”, 
+(“%d”, i););
+}
+Contents
+Contents
+ Branch statements.
+Branch statements.
+ Loop statements.
+Loop statements.
+ Basic utilities.
+Basic utilities.
+19
+Fundamentals of Programming - Nguyễn Minh Huy
+Basic utilities
+Basic utilities
+ Input from keyboard in C/C++:
+Input from keyboard in C/C++:
+ scanf
+scanf, , std::
+std::cin
+cin >>
+>> do not flush input stream.
+do not flush input stream.
+ Use while 
+Use while getchar
+getchar or std::
+or std::cin.ignore
+cin.ignore is lengthy.
+is lengthy.
+ Clean and safe input from keyboard:
+Clean and safe input from keyboard:
+ Input a whole line: 
+Input a whole line: fgets
+fgets, , std::
+std::cin.getline
+cin.getline.
+ Extract data from the line: 
+Extract data from the line: sscanf
+sscanf, , std::
+std::stringstream
+stringstream.
+ Validate data by result value.
+Validate data by result value.
+char  line[ 100 ];
+char  line[ 100 ];
+int
+int
+num;
+num;
+do {
+do {
+printf
+printf(“Enter a integer = “);
+(“Enter a integer = “);
+fgets
+fgets( line, 100, 
+( line, 100, stdin
+stdin ););
+// C++: 
+// C++: std::
+std::cin.getline
+cin.getline( line, 100 );
+( line, 100 );
+} while ( 
+} while ( sscanf
+sscanf( line, “%d”, &a ) != 1 );
+( line, “%d”, &a ) != 1 );
+// C++: } while ( !( 
+// C++: } while ( !( std::
+std::stringstream
+stringstream( line ) >> a ) );
+( line ) >> a ) );
+20
+Fundamentals of Programming - Nguyễn Minh Huy
+Basic utilities
+Basic utilities
+ Floating
+Floating-point error:
+point error:
+ Cannot represent real number exactly.
+Cannot represent real number exactly.
+float  x = 0.1;
+float  x = 0.1;
+printf
+printf(“%.15f”, x);
+(“%.15f”, x);
+// Print: 0.100000001490116
+// Print: 0.100000001490116
+ Accumulate small errors 
+Accumulate small errors  big error.
+big error.
+int
+int n = 1’000’000;
+n = 1’000’000;
+int
+int n  1 000 000;
+n  1 000 000;
+float x = 0.1 * n;
+float x = 0.1 * n;
+// Compute x directly.
+// Compute x directly.
+float y = 0.0;
+float y = 0.0;
+// Compute y by accumulation.
+// Compute y by accumulation.
+for (
+for (int
+int i = 0; 
+= 0; i < n; ++
+< n; ++i)
+y += 0.1;
+y += 0.1;
+// Error accumulated here!
+// Error accumulated here!
+printf
+printf("%f
+("%f\n", x);
+n", x);
+// x = 100000.000000
+// x = 100000.000000
+printf
+printf("%f
+("%f\n", y);
+n", y);
+// y = 100958.343750 
+// y = 100958.343750 
+if (x != y) 
+if (x != y) printf
+printf("("not equal.
+not equal.");
+");
+21
+Fundamentals of Programming - Nguyễn Minh Huy
+Basic utilities
+Basic utilities
+ Delay execution in C/C++:
+Delay execution in C/C++:
+ Instruction runs very fast.
+Instruction runs very fast.
+ Slow down execution is useful for:
+Slow down execution is useful for:
+ Checking output.
+Checking output.
+ Controlling game speed.
+Controlling game speed.
+Ti
+d
+ti
+Ti
+d
+ti
+ Timed operations.
+Timed operations.
+ C on Windows: <
+C on Windows: <windows.h
+windows.h>
+Sleep
+Sleep( <millisecond> )
+( <millisecond> )
+ C on Linux: <
+C on Linux: <unistd.h
+unistd.h>
+usleep
+usleep( <microsecond> )
+( <microsecond> )
+ C++: <thread>, <
+C++: <thread>, <chrono
+chrono>
+std::
+std::this_thread
+this_thread::::sleep_for
+sleep_for( std::
+( std::chrono
+chrono::milliseconds(<value>) )
+::milliseconds(<value>) )
+22
+Fundamentals of Programming - Nguyễn Minh Huy
+Basic utilities
+Basic utilities
+ Generate random number in C/C++:
+Generate random number in C/C++:
+ Random ~ unpredictable, uniformly distributed.
+Random ~ unpredictable, uniformly distributed.
+ Hardware source: dice, cards, atmospheric noise.
+Hardware source: dice, cards, atmospheric noise.
+ Software source: uniform sequence.
+Software source: uniform sequence.
+ A0 = random seed,   An = F( An
+A0 = random seed,   An = F( An-1 ).
+1 ).
+ C random: <
+C random: <stdlib.h
+stdlib.h>, <
+>, <time.h
+time.h>
+srand
+srand( time( 0 ) );
+( time( 0 ) );
+// Weak random seed?
+// Weak random seed?
+for (
+for (int
+int i = 0; 
+= 0; i < 10; ++
+< 10; ++i)
+printf
+printf(“%d “, 
+(“%d “, rand
+rand( ) ); 
+( ) ); 
+// Small random space?
+// Small random space?
+ C++ random: <random>
+C++ random: <random>
+std::
+std::random_device
+random_device hardRand
+hardRand;
+// Hardware random source.
+// Hardware random source.
+std::mt19937
+std::mt19937 softRand
+softRand( ( hardRand
+hardRand( ) );
+( ) );
+// Software random source.
+// Software random source.
+std::
+std::uniform_int_distribution
+uniform_int_distribution dist( min, max ); // Uniform function.
+dist( min, max ); // Uniform function.
+for (
+for (int
+int i = 0; 
+= 0; i < 10; ++
+< 10; ++i)
+std::
+std::cout
+cout << 
+<< dist
+dist( ( softRand
+softRand ) << ‘ ‘;
+) << ‘ ‘;
+23
+Fundamentals of Programming - Nguyễn Minh Huy
+Summary
+Summary
+ Branch statements:
+Branch statements:
+ ifif-else: two branches.
+else: two branches.
+ switch
+switch-case: multiple branches.
+case: multiple branches.
+ Loop statements
+Loop statements:
+ while: condition is checked before the loop
+while: condition is checked before the loop
+ while: condition is checked before the loop.
+while: condition is checked before the loop.
+ do
+do-while: condition is checked after the loop. 
+while: condition is checked after the loop. 
+ for:
+for:
+ Initialize counter.
+Initialize counter.
+ Check condition.
+Check condition.
+ Execute loop.
+Execute loop.
+ Update counter.
+Update counter.
+ break, continue: use with if
+break, continue: use with if-else in a loop.
+else in a loop.
+24
+Fundamentals of Programming - Nguyễn Minh Huy
+Summary
+Summary
+ Basic utilities:
+Basic utilities:
+ Input from keyboard:
+Input from keyboard:
+ Get whole line: 
+Get whole line: fgets
+fgets, std::
+, std::cin.getline
+cin.getline.
+ Extract data from line: 
+Extract data from line: sscanf
+sscanf, std::
+, std::stringstream
+stringstream.
+ Floating
+Floating-point error:
+point error:
+C
+t
+t
+l
+b
+tl
+C
+t
+t
+l
+b
+tl
+ Cannot represent real number exactly.
+Cannot represent real number exactly.
+ Avoid accumulating error.
+Avoid accumulating error.
+ Delay execution:
+Delay execution:
+ C: Sleep, 
+C: Sleep, usleep
+usleep.
+ C++: std::
+C++: std::this_thread
+this_thread::::sleep_for
+sleep_for.
+ Random number:
+Random number:
+ C: 
+C: srand
+srand, rand.
+, rand.
+ C++: std::
+C++: std::random_device
+random_device, std
+, std::mt19937.
+::mt19937.
+25
+Fundamentals of Programming - Nguyễn Minh Huy
+Practice
+Practice
+ Practice 3.1:
+Practice 3.1:
+Write C/C++ program to simulate a calculator as follow:
+Write C/C++ program to simulate a calculator as follow:
+- Enter two integers.
+Enter two integers.
+- Enter an operator (+, 
+Enter an operator (+, -, *, /, %).
+, *, /, %).
+- Perform the operator on two integers and print result.
+Perform the operator on two integers and print result.
+Note: flush the standard input stream after each input.
+Note: flush the standard input stream after each input.
+Note: flush the standard input stream after each input.
+Note: flush the standard input stream after each input.
+Input format:
+Input format:
+Enter two integers = 7  5
+Enter two integers = 7  5
+Enter an operator (+, 
+Enter an operator (+, -, *, /, %) = +
+, *, /, %) = +
+Output format (no error):
+Output format (no error):
+Result = 12
+Result = 12
+Output format (divided
+Output format (divided-by
+by-zero error):
+zero error):
+Error: divided by zero.
+Error: divided by zero.
+26
+Fundamentals of Programming - Nguyễn Minh Huy
+Practice
+Practice
+ Practice 3.2:
+Practice 3.2:
+Write C/C++ program to solve quadratic equation: ax
+Write C/C++ program to solve quadratic equation: ax2 + 
++ bx
+bx + c = 0.
++ c = 0.
+Input format:
+Input format:
+Enter coefficients a, b, c = 2  
+Enter coefficients a, b, c = 2  -5  3
+5  3
+Output format (2 solutions):
+Output format (2 solutions):
+Output format (2 solutions):
+Output format (2 solutions):
+Solution 1 = 1
+Solution 1 = 1
+Solution 2 = 1.5
+Solution 2 = 1.5
+Output format (1 solution):
+Output format (1 solution):
+Solution 1 = <result>
+Solution 1 = <result>
+Output format (no solution):
+Output format (no solution):
+No solution!
+No solution!
+27
+Fundamentals of Programming - Nguyễn Minh Huy
+Practice
+Practice
+ Practice 3.3:
+Practice 3.3:
+Write C/C++ program to count the number of days in a month:
+Write C/C++ program to count the number of days in a month:
+- Enter month and year.
+Enter month and year.
+- Count the number of days in the month and print result.
+Count the number of days in the month and print result.
+Input format:
+Input format:
+Input format:
+Input format:
+Enter month and year =  6  2012
+Enter month and year =  6  2012
+Output format:
+Output format:
+Month 
+Month 6 
+6 in year 
+in year 2012
+2012 has 
+has 30
+30 days.
+days.
+28
+Fundamentals of Programming - Nguyễn Minh Huy
+Practice
+Practice
+ Practice 3.4:
+Practice 3.4:
+Write C/C++ program as follow:
+Write C/C++ program as follow:
+- Enter a positive integer N.
+Enter a positive integer N.
+- Compute and print results:
+Compute and print results:
+a) N! = 1 * 2 * … * N.
+a) N! = 1 * 2 * … * N.
+b)
+b) lnln(2) = 1
+(2) = 1 - 1/2 + 1/3
+1/2 + 1/3 - … +/
+… +/- 1/N.
+1/N.
+b) 
+b) lnln(2)  1 
+(2)  1 1/2  1/3 
+1/2  1/3 … /
+… / 1/N.
+1/N.
+c) PI = 4 ( 1 
+c) PI = 4 ( 1 – 1/3 + 1/5 
+1/3 + 1/5 – … +/
+… +/- 1/(2*N + 1) ).
+1/(2*N + 1) ).
+d) S = a
+d) S = a1 + a
++ a2 + … 
++ … ak ( { 
+( { ai } are all square numbers <= N).
+} are all square numbers <= N).
+Output format:
+Output format:
+N! = <a result>
+N! = <a result>
+lnln(2) = <b result>
+(2) = <b result>
+PI = <c result>
+PI = <c result>
+S = <d result>
+S = <d result>
+29
+Fundamentals of Programming - Nguyễn Minh Huy
+Practice
+Practice
+ Practice 3.5:
+Practice 3.5:
+Write C/C++ program to find all numbers satisfying:
+Write C/C++ program to find all numbers satisfying:
+- A 3
+A 3-digit positive integer.
+digit positive integer.
+- Tens digit = Hundreds digit + Ones digit.
+Tens digit = Hundreds digit + Ones digit.
+Note: delay output to check result.
+Note: delay output to check result.
+Output format:
+Output format:
+1: <the 1
+1: <the 1stst satisfied number>
+satisfied number>
+2: <the 2
+2: <the 2nd
+nd satisfied number>
+satisfied number>
+…
+N: <the N
+N: <the Nth
+th satisfied number>
+satisfied number>
+There are N satisfied numbers.
+There are N satisfied numbers.
+30
+Fundamentals of Programming - Nguyễn Minh Huy
+
+
+=== EXERCISES PDF ===
+Control Flow Statements
+Control Flow Statements
+Exercises
+Exercises
+Inst. 
+Inst. Nguyễn
+Nguyễn Minh 
+Minh Huy
+Huy
+1
+Fundamentals of Programming - Nguyễn Minh Huy
+Practice
+Practice
+ Practice 3.6:
+Practice 3.6:
+Write C/C++ program to classify a triangle:
+Write C/C++ program to classify a triangle:
+- Enter 3 positive real numbers a, b, c (re
+Enter 3 positive real numbers a, b, c (re-enter if invalid).
+enter if invalid).
+- Check if a, b, c can forms a triangle.
+Check if a, b, c can forms a triangle.
+- If yes, print the triangle type.
+If yes, print the triangle type.
+(normal, right, isosceles, right
+(normal, right, isosceles, right-isosceles, equilateral).
+isosceles, equilateral).
+(
+g
+g
+(
+g
+g
+q
+)
+q
+)
+Input format:
+Input format:
+Enter 3 positive real numbers = 3  4  5
+Enter 3 positive real numbers = 3  4  5
+Output format (can form a triangle):
+Output format (can form a triangle):
+Can form a triangle.
+Can form a triangle.
+Right triangle.
+Right triangle.
+Output format (cannot form a triangle):
+Output format (cannot form a triangle):
+Cannot form a triangle!
+Cannot form a triangle!
+2
+Fundamentals of Programming - Nguyễn Minh Huy
+Practice
+Practice
+ Practice 3.7:
+Practice 3.7:
+Write C/C++ program to compute electricity bill:
+Write C/C++ program to compute electricity bill:
+- Enter old and new kWh (re
+Enter old and new kWh (re-enter if invalid).
+enter if invalid).
+- Compute the price and print result.
+Compute the price and print result.
+Price table:
+Price table:
+Levels
+Consumed kWh
+Unit prices
+3
+Fundamentals of Programming - Nguyễn Minh Huy
+Levels
+Consumed kWh 
+Unit prices
+1
+0 – 50
+1984 đ
+2
+51 – 100
+2050 đ
+3
+101 – 200
+2380 đ
+4
+201 – 300
+2998 đ
+5
+301 – 400
+3350 đ
+6
+401 – more
+3460 đ
+Practice
+Practice
+ Practice 3.8:
+Practice 3.8:
+Write C/C++ program find max and min as follow:
+Write C/C++ program find max and min as follow:
+- Enter a sequence of positive integers.
+Enter a sequence of positive integers.
+(re
+(re-enter if invalid, stop if enter zero).
+enter if invalid, stop if enter zero).
+- Print 
+Print max, min, average (do 
+max, min, average (do not include zero).
+not include zero).
+Notes: do not use array.
+Notes: do not use array.y
+Input format:
+Input format:
+Number 1 = 5
+Number 1 = 5
+Number 2 = 3
+Number 2 = 3
+Number 3 = 9
+Number 3 = 9
+Number 4 = 0
+Number 4 = 0
+Output format:
+Output format:
+Max = 9
+Max = 9
+Min = 3
+Min = 3
+4
+Fundamentals of Programming - Nguyễn Minh Huy
+Practice
+Practice
+ Practice 3.9:
+Practice 3.9:
+Write C/C++ program to find prime numbers:
+Write C/C++ program to find prime numbers:
+- Enter a positive integer N (re
+Enter a positive integer N (re-enter if invalid).
+enter if invalid).
+- Print all prime numbers <= N.
+Print all prime numbers <= N.
+Input format:
+Input format:
+Input format:
+Input format:
+Enter a positive integer = 11
+Enter a positive integer = 11
+Output format:
+Output format:
+#1 = 2
+#1 = 2
+#2 = 3
+#2 = 3
+#3 = 5
+#3 = 5
+#4 = 7
+#4 = 7
+#5 = 11
+#5 = 11
+There are 5 prime numbers.
+There are 5 prime numbers.
+5
+Fundamentals of Programming - Nguyễn Minh Huy
+Practice
+Practice
+ Practice 3.10:
+Practice 3.10:
+Write C/C++ program to find GCD (greatest common divisor) and LCM 
+Write C/C++ program to find GCD (greatest common divisor) and LCM 
+(least common multiple):
+(least common multiple):
+- Enter 2 positive integers a, b (re
+Enter 2 positive integers a, b (re-enter if invalid).
+enter if invalid).
+- Print:
+Print:
+- GCD of a, b.
+GCD of a, b.
+- LCM of a, b.
+LCM of a, b.
+Input format:
+Input format:
+Enter 2 positive integers = 8  12
+Enter 2 positive integers = 8  12
+Output format:
+Output format:
+GCD = 4
+GCD = 4
+LCM = 24
+LCM = 24
+6
+Fundamentals of Programming - Nguyễn Minh Huy
+Practice
+Practice
+ Practice 3.11:
+Practice 3.11:
+Write C/C++ program to print bit representation of an integer:
+Write C/C++ program to print bit representation of an integer:
+- Enter integer N and positive integer M.
+Enter integer N and positive integer M.
+- Print the first M bit from the right of N.
+Print the first M bit from the right of N.
+Input format:
+Input format:
+Input format:
+Input format:
+Enter N, M = 11  3
+Enter N, M = 11  3
+Output format:
+Output format:
+The first 3 bit from the right of 11: 011
+The first 3 bit from the right of 11: 011
+7
+Fundamentals of Programming - Nguyễn Minh Huy
+Practice
+Practice
+ Practice 3.12:
+Practice 3.12:
+Write C/C++ program to read phone number 
+Write C/C++ program to read phone number as follow:
+as follow:
+- Enter a phone number (10 digits max) (re
+Enter a phone number (10 digits max) (re-enter if invalid).
+enter if invalid).
+- Print how to read the phone number.
+Print how to read the phone number.
+Notes:
+Notes:
+- Do not use array/string processing (get element, get length).
+Do not use array/string processing (get element, get length).
+Do not use array/string processing (get element, get length).
+Do not use array/string processing (get element, get length).
+Input format:
+Input format:
+Phone number: 
+Phone number: 838272727.
+838272727.
+Output format:
+Output format:
+Eight three eight two seven two seven two seven.
+Eight three eight two seven two seven two seven.
+8
+Fundamentals of Programming - Nguyễn Minh Huy
+Practice
+Practice
+ Practice 3.13:
+Practice 3.13:
+Write C/C++ program as follow:
+Write C/C++ program as follow:
+- Enter a positive integer N (re
+Enter a positive integer N (re-enter if invalid).
+enter if invalid).
+- Check if:
+Check if:
+a) Digits of N is in descending order from the ones.
+a) Digits of N is in descending order from the ones.
+b) Digits of N is symmetric.
+b) Digits of N is symmetric.
+b) Digits of N is symmetric.
+b) Digits of N is symmetric.
+Input format:
+Input format:
+Enter N = 12344321
+Enter N = 12344321
+Output format:
+Output format:
+Not descending.
+Not descending.
+Symmetric.
+Symmetric.
+9
+Fundamentals of Programming - Nguyễn Minh Huy
+Practice
+Practice
+ Practice 3.14:
+Practice 3.14:
+Write C/C++ program to print month calendar as follow:
+Write C/C++ program to print month calendar as follow:
+- Enter month and year (re
+Enter month and year (re-enter if invalid).
+enter if invalid).
+- Enter day of week of the first day in the month (for alignment).
+Enter day of week of the first day in the month (for alignment).
+- Print the calendar of the month.
+Print the calendar of the month.
+Input format:
+Input format:
+Input format:
+Input format:
+Month and year to view calendar? 9 2022
+Month and year to view calendar? 9 2022
+Day of week of first day in month? 5
+Day of week of first day in month? 5
+Output format:
+Output format:
+Mon Tue Wed Thu Fri Sat Sun
+Mon Tue Wed Thu Fri Sat Sun
+1   2   3   4
+1   2   3   4
+5   6   7   8   9  10  11
+5   6   7   8   9  10  11
+12  13  14  15  16  17  18
+12  13  14  15  16  17  18
+19  20  21  22  23  24  25
+19  20  21  22  23  24  25
+26  27  28  29  30
+26  27  28  29  30
+10
+Fundamentals of Programming - Nguyễn Minh Huy
+Practice
+Practice
+ Practice 3.15:
+Practice 3.15:
+Write C/C++ game for grade 1 student to practice +, 
+Write C/C++ game for grade 1 student to practice +, - as follow:
+as follow:
+- Computer asks randomly + or 
+Computer asks randomly + or – between two positive integers.
+between two positive integers.
+- Player answers the result (re
+Player answers the result (re-enter if wrong).
+enter if wrong).
+- Computer continues to asks until player answers zero.
+Computer continues to asks until player answers zero.
+- Constraint: operands, result in range [1..99].
+Constraint: operands, result in range [1..99].
+Constraint: operands, result in range [1..99].
+Constraint: operands, result in range [1..99].
+Notes: generate random numbers.
+Notes: generate random numbers.
+Game format:
+Game format:
+Question 1: 2 + 5 = ?
+Question 1: 2 + 5 = ?
+Answer: 7
+Answer: 7
+Question 2: 18 
+Question 2: 18 – 9 = ?
+9 = ?
+Answer: 8
+Answer: 8
+Answer: 9
+Answer: 9
+Question 3: 6 + 25 = ?
+Question 3: 6 + 25 = ?
+Answer: 0
+Answer: 0
+11
+Fundamentals of Programming - Nguyễn Minh Huy
