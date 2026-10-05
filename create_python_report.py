@@ -195,48 +195,115 @@ doc.add_page_break()
 # ============================================
 # TABLE OF CONTENTS
 # ============================================
-toc_title = add_heading(doc, 'MỤC LỤC', level=1)
-for run in toc_title.runs:
-    run.font.name = 'Times New Roman'
-    run.element.rPr.rFonts.set(qn('w:eastAsia'), 'Times New Roman')
+# Title "MỤC LỤC" - centered, bold, size 16
+toc_title = doc.add_paragraph()
+toc_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
+toc_title.paragraph_format.space_after = Pt(10)
+toc_run = toc_title.add_run('MỤC LỤC')
+toc_run.font.name = 'Times New Roman'
+toc_run.font.size = Pt(16)
+toc_run.bold = True
+toc_run.element.rPr.rFonts.set(qn('w:eastAsia'), 'Times New Roman')
 
-toc_items = [
-    ('Chương 1. Tổng quan về Python', '3'),
-    ('1.1. Python là gì?', '3'),
-    ('1.2. Lịch sử phát triển của Python', '4'),
-    ('1.3. Những đặc điểm nổi bật của Python', '5'),
-    ('1.4. Các lĩnh vực sử dụng Python', '6'),
-    ('Chương 2. Nền tảng ngôn ngữ Python', '8'),
-    ('2.1. Cú pháp và indentation', '8'),
-    ('2.2. Biến và dynamic typing', '9'),
-    ('2.3. Các kiểu dữ liệu cơ bản', '10'),
-    ('2.4. Cấu trúc điều khiển', '11'),
-    ('2.5. Function', '12'),
-    ('Chương 3. Những đặc trưng thú vị của Python', '13'),
-    ('Chương 4. Lập trình hướng đối tượng trong Python', '17'),
-    ('Chương 5. Python Standard Library', '19'),
-    ('Chương 6. Hệ sinh thái thư viện Python', '21'),
-    ('Chương 7. Ứng dụng thực tế', '23'),
-    ('Chương 8. Một số khía cạnh nâng cao và đặc trưng', '25'),
-    ('Chương 9. Ưu điểm và hạn chế', '27'),
-    ('Chương 10. So sánh với một số ngôn ngữ', '28'),
-    ('Kết luận', '30'),
-    ('Tài liệu tham khảo', '31'),
-]
+# Add horizontal line
+line = doc.add_paragraph()
+line.paragraph_format.space_before = Pt(0)
+line.paragraph_format.space_after = Pt(15)
+line_run = line.add_run('─' * 60)
+line_run.font.name = 'Times New Roman'
+line_run.font.size = Pt(10)
+line_run.font.color.rgb = RGBColor(128, 128, 128)
 
-for item, page in toc_items:
+# TOC entries with proper formatting
+def add_toc_entry(doc, text, page, is_chapter=False, indent=0):
     p = doc.add_paragraph()
-    p.paragraph_format.space_before = Pt(2)
-    p.paragraph_format.space_after = Pt(2)
-    run = p.add_run(item)
+    p.paragraph_format.space_before = Pt(3)
+    p.paragraph_format.space_after = Pt(3)
+    p.paragraph_format.left_indent = Cm(indent)
+    
+    # Add text
+    run = p.add_run(text)
     run.font.name = 'Times New Roman'
     run.font.size = Pt(13)
+    if is_chapter:
+        run.bold = True
     run.element.rPr.rFonts.set(qn('w:eastAsia'), 'Times New Roman')
-    # Add tab and page number
-    tab_run = p.add_run(f'\t{page}')
-    tab_run.font.name = 'Times New Roman'
-    tab_run.font.size = Pt(13)
-    tab_run.element.rPr.rFonts.set(qn('w:eastAsia'), 'Times New Roman')
+    
+    # Add dotted line to page number
+    dot_run = p.add_run('.' * (55 - len(text)))
+    dot_run.font.name = 'Times New Roman'
+    dot_run.font.size = Pt(13)
+    dot_run.element.rPr.rFonts.set(qn('w:eastAsia'), 'Times New Roman')
+    
+    # Add page number
+    page_run = p.add_run(page)
+    page_run.font.name = 'Times New Roman'
+    page_run.font.size = Pt(13)
+    page_run.element.rPr.rFonts.set(qn('w:eastAsia'), 'Times New Roman')
+
+# Chapter entries
+add_toc_entry(doc, 'CHƯƠNG 1. TỔNG QUAN VỀ PYTHON', '3', is_chapter=True)
+add_toc_entry(doc, '1.1. Python là gì?', '3')
+add_toc_entry(doc, '1.2. Lịch sử phát triển của Python', '4')
+add_toc_entry(doc, '1.3. Những đặc điểm nổi bật của Python', '5')
+add_toc_entry(doc, '1.4. Các lĩnh vực sử dụng Python', '6')
+
+add_toc_entry(doc, 'CHƯƠNG 2. NỀN TẢNG NGÔN NGỮ PYTHON', '8', is_chapter=True)
+add_toc_entry(doc, '2.1. Cú pháp và indentation', '8')
+add_toc_entry(doc, '2.2. Biến và dynamic typing', '9')
+add_toc_entry(doc, '2.3. Các kiểu dữ liệu cơ bản', '10')
+add_toc_entry(doc, '2.4. Cấu trúc điều khiển', '11')
+add_toc_entry(doc, '2.5. Function', '12')
+
+add_toc_entry(doc, 'CHƯƠNG 3. NHỮNG ĐẶC TRƯNG THÚ VỊ CỦA PYTHON', '13', is_chapter=True)
+add_toc_entry(doc, '3.1. List comprehension', '13')
+add_toc_entry(doc, '3.2. Multiple assignment', '14')
+add_toc_entry(doc, '3.3. Unpacking', '15')
+add_toc_entry(doc, '3.4. enumerate()', '15')
+add_toc_entry(doc, '3.5. zip()', '16')
+add_toc_entry(doc, '3.6. Lambda và higher-order functions', '16')
+add_toc_entry(doc, '3.7. Generator và yield', '17')
+add_toc_entry(doc, '3.8. Exception handling', '18')
+add_toc_entry(doc, '3.9. Context manager và with', '18')
+add_toc_entry(doc, '3.10. Decorator', '19')
+
+add_toc_entry(doc, 'CHƯƠNG 4. LẬP TRÌNH HƯỚNG ĐỐI TƯỢNG TRONG PYTHON', '20', is_chapter=True)
+add_toc_entry(doc, '4.1. Class và object', '20')
+add_toc_entry(doc, '4.2. Constructor', '21')
+add_toc_entry(doc, '4.3. Instance attribute và method', '21')
+add_toc_entry(doc, '4.4. Inheritance', '22')
+add_toc_entry(doc, '4.5. Polymorphism', '22')
+
+add_toc_entry(doc, 'CHƯƠNG 5. PYTHON STANDARD LIBRARY', '23', is_chapter=True)
+add_toc_entry(doc, '5.1. pathlib và os', '23')
+add_toc_entry(doc, '5.2. math, random, datetime', '24')
+add_toc_entry(doc, '5.3. json và re', '24')
+add_toc_entry(doc, '5.4. collections', '25')
+
+add_toc_entry(doc, 'CHƯƠNG 6. HỆ SINH THÁI THƯ VIỆN PYTHON', '26', is_chapter=True)
+add_toc_entry(doc, '6.1. Khoa học dữ liệu và tính toán số', '26')
+add_toc_entry(doc, '6.2. Machine Learning và Deep Learning', '27')
+add_toc_entry(doc, '6.3. Web Development', '27')
+add_toc_entry(doc, '6.4. Network và Web Scraping', '28')
+
+add_toc_entry(doc, 'CHƯƠNG 7. ỨNG DỤNG THỰC TẾ', '29', is_chapter=True)
+add_toc_entry(doc, '7.1. Tự động hóa file', '29')
+add_toc_entry(doc, '7.2. Xử lý dữ liệu', '30')
+add_toc_entry(doc, '7.3. Gọi Web API', '30')
+add_toc_entry(doc, '7.4. AI / Machine Learning', '31')
+
+add_toc_entry(doc, 'CHƯƠNG 8. MỘT SỐ KHÍA CẠNH NÂNG CAO VÀ ĐẶC TRƯNG', '32', is_chapter=True)
+add_toc_entry(doc, '8.1. Python mở rộng bằng C/C++', '32')
+add_toc_entry(doc, '8.2. Python bytecode và Python Virtual Machine', '33')
+add_toc_entry(doc, '8.3. Hiệu năng của Python', '33')
+
+add_toc_entry(doc, 'CHƯƠNG 9. ƯU ĐIỂM VÀ HẠN CHẾ', '34', is_chapter=True)
+
+add_toc_entry(doc, 'CHƯƠNG 10. SO SÁNH VỚI MỘT SỐ NGÔN NGỮ', '35', is_chapter=True)
+
+add_toc_entry(doc, 'KẾT LUẬN', '37', is_chapter=True)
+
+add_toc_entry(doc, 'TÀI LIỆU THAM KHẢO', '38', is_chapter=True)
 
 doc.add_page_break()
 
