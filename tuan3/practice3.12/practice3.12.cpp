@@ -44,12 +44,16 @@ int main()
     {
         std::cout << "Phone number: ";
 
-        int  c, cnt = 0;
+        int c = 0;
+        int  cnt     = 0;
         bool bad     = false;
         bool tooLong = false;
-        std::cin >> c;
-        while (c != '\n' && c != EOF)
+        
+        while (true)
         {
+            c = getchar();
+            if (c == '\n' || c == EOF) 
+                break;
             if (c >= '0' && c <= '9')
             {
                 cnt++;
@@ -71,6 +75,7 @@ int main()
 
         if (tooLong || bad || cnt == 0)
         {
+            std::cin.ignore(1e9, '\n');
             std::cout << '\n';
             continue;
         }
