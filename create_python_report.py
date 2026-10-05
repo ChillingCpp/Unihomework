@@ -1481,5 +1481,5 @@ for ref in refs:
     run.element.rPr.rFonts.set(qn('w:eastAsia'), 'Times New Roman')
 
 # Save document
-doc.save(r'C:\Users\Admin\Desktop\baitap\BaoCao_Python.docx')
-print("Document created successfully: BaoCao_Python.docx")
+doc.save(r'C:\Users\Admin\Desktop\baitap\BaoCao_Python_v2.docx')
+print("Document created successfully: BaoCao_Python_v2.docx")
