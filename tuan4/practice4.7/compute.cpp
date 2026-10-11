@@ -4,7 +4,7 @@ static double dist(P a, P b)
 {
     double dx = a.x - b.x;
     double dy = a.y - b.y;
-    return std::sqrt(dx * dx + dy * dy);
+    return std::hypot(dx, dy);
 }
 double peri(T t)
 {

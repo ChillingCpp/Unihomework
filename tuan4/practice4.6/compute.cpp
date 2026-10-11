@@ -1,7 +1,7 @@
 #include "compute.h"
 float gpa(S s)
 {
-    return (s.l * 2 + s.m * 3) / 5;
+    return (s.l + s.m) /2;
 }
 int rank(float g)
 {

@@ -1,5 +1,4 @@
-#include "input.h"
-#include "output.h"
+#include "io.h"
 int main()
 {
     F f;

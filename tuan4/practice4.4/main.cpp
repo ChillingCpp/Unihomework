@@ -1,6 +1,4 @@
-#include "menu_input.h"
-#include "menu_compute.h"
-#include "menu_output.h"
+#include "menu.h"
 int main()
 {
     while (1) {

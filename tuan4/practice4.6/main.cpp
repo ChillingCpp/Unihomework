@@ -1,6 +1,5 @@
-#include "input.h"
+#include "io.h"
 #include "compute.h"
-#include "output.h"
 int main()
 {
     S s;

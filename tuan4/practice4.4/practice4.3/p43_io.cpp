@@ -1,5 +1,19 @@
 #include <iostream>
-#include "p43_output.h"
+
+#include "p43_io.h"
+void p43_in(double &a, double &b, double &c)
+{
+    std::cout << "Enter 3 positive real numbers = ";
+    while (1) {
+        if ((std::cin >> a >> b >> c) && a > 0 && b > 0 && c > 0) {
+            std::cin.ignore(1e9, '\n');
+            return;
+        }
+        std::cin.clear();
+        std::cin.ignore(1e9, '\n');
+        std::cout << "Enter 3 positive real numbers = ";
+    }
+}
 void p43_out(int k)
 {
     if (k < 0) {
