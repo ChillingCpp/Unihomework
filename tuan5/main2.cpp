@@ -81,7 +81,7 @@ int bai24(int x) {
   }
   return ans;
 }
-int bai25(int x) {
+long long bai25(int x) {
   long long ans = 0;
   for (int i = 1; i * i <= x; ++i) {
     if (i * i == x && i % 2 == 0)
@@ -145,13 +145,52 @@ long long bai74(int d, int m, long long y) {
 
 int main() {
   long long x;
+  int n;
   printf("nhap n : ");
   scanf("%lld", &x);
-  printf("Tong cong : %lld", bai1(x));
+  printf("Tong cong : %lld\n", bai1(x));
 
   printf("nhap n :");
   scanf("%lld", &x);
   printf("Tong binh phuong : %lld\n", bai2(x));
+
+  printf("nhap n :");
+  scanf("%d", &n);
+  printf("S3 = %.2f\n", bai3(n));
+
+  printf("nhap n :");
+  scanf("%d", &n);
+  printf("S4 = %.2f\n", bai4(n));
+
+  printf("nhap n :");
+  scanf("%d", &n);
+  printf("S5 = %.2f\n", bai5(n));
+
+  printf("nhap n :");
+  scanf("%d", &n);
+  printf("Uoc so : ");
+  bai20(n);
+  printf("\n");
+
+  printf("nhap n :");
+  scanf("%d", &n);
+  printf("Tong uoc so = %lld\n", bai21(n));
+
+  printf("nhap n :");
+  scanf("%d", &n);
+  printf("Tich uoc so = %lld\n", bai22(n));
+
+  printf("nhap n :");
+  scanf("%d", &n);
+  printf("So luong uoc so = %d\n", bai23(n));
+
+  printf("nhap n :");
+  scanf("%d", &n);
+  printf("So luong uoc so le = %d\n", bai24(n));
+
+  printf("nhap n :");
+  scanf("%d", &n);
+  printf("Tong uoc so chan = %d\n", bai25(n));
 
   printf("nhap n :");
   scanf("%lld", &x);
