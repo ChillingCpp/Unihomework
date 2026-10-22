@@ -1,5 +1,5 @@
 #pragma once
-const int MX = 100;
+const int MX = 100005;
 struct D {
     int d;
     int m;

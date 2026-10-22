@@ -1,5 +1,5 @@
 #pragma once
-const int MX = 1000;
+const int MX = 100005;
 void in(int a[], int &n);
 int ng(int a[], int n);
 int pr(int a[], int n);

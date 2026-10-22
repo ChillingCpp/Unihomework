@@ -1,5 +1,5 @@
 #pragma once
-const int MX = 100;
+const int MX = 1005;
 void in(int a[][MX], int &n);
 int md(int a[][MX], int n);
 int ad(int a[][MX], int n);

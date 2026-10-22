@@ -1,4 +1,3 @@
-#include <functional>
 #include <math.h>
 #include <stdio.h>
 using namespace std;
@@ -28,9 +27,9 @@ double bai5(int x) {
 void bai20(int x) {
   for (int i = 1; i * i <= x; ++i) {
     if (i * i == x)
-      printf("%d ", &i);
+      printf("%d ", i);
     if (x % i == 0) {
-      printf("%d ", &i);
+      printf("%d ", i);
       printf("%d ", x / i);
     }
   }
@@ -146,11 +145,11 @@ long long bai74(int d, int m, long long y) {
 int main() {
   long long x;
   int n;
-  printf("nhap n : ");
+  printf("nhap x : ");
   scanf("%lld", &x);
   printf("Tong cong : %lld\n", bai1(x));
 
-  printf("nhap n :");
+  printf("nhap x :");
   scanf("%lld", &x);
   printf("Tong binh phuong : %lld\n", bai2(x));
 
@@ -190,25 +189,25 @@ int main() {
 
   printf("nhap n :");
   scanf("%d", &n);
-  printf("Tong uoc so chan = %d\n", bai25(n));
+  printf("Tong uoc so chan = %lld\n", bai25(n));
 
-  printf("nhap n :");
+  printf("nhap x :");
   scanf("%lld", &x);
   printf("S33 = %.2f\n", bai33(x));
 
-  printf("nhap n :");
+  printf("nhap x :");
   scanf("%lld", &x);
   printf("S34 = %.2f\n", bai34(x));
 
-  printf("nhap n :");
+  printf("nhap x :");
   scanf("%lld", &x);
   printf("k = %lld\n", bai42(x));
 
-  printf("nhap n :");
+  printf("nhap x :");
   scanf("%lld", &x);
   printf("Dao nguoc = %lld\n", bai50(x));
 
-  printf("nhap n :");
+  printf("nhap x :");
   scanf("%lld", &x);
   printf(bai57(x) ? "YES\n" : "NO\n");
 

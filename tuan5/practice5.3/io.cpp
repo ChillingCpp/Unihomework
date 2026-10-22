@@ -6,7 +6,7 @@ static float gp(S s)
 {
     return (s.l * 2 + s.m * 3) / 5;
 }
-static void rs(char *b, int s, int k)
+static void rs(char b[], int s, int k)
 {
     if (k == 0)
         std::cout << "Enter id = ";

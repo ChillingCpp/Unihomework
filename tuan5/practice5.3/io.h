@@ -1,5 +1,5 @@
 #pragma once
-const int MX = 100;
+const int MX = 10000;
 struct S {
     char i[9];
     char n[50];
