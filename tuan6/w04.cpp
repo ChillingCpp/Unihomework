@@ -64,6 +64,7 @@ bool dec(NGAY& a, int k) // demo giam 1 ngay trong ham main
 void compute(NGAY a, NGAY b)
 {
     /// in ra khoang cach tinh theo ngay, tinh theo thang, tinh theo nam, dang so thuc
+    // lay 365/ 12 ra trung binh
 }
 int main()
 {  
