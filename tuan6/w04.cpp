@@ -19,17 +19,6 @@ static int lp(int y)
     return y % 400 == 0 || (y % 4 == 0 && y % 100 != 0);
 }
 
-static int vd(NGAY a)
-{
-    if (a.y < 1 || a.m < 1 || a.m > 12 || a.d < 1)
-        return 0;
-    int t[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    int q = t[a.m - 1];
-    if (a.m == 2 && lp(a.y))
-        q = 29;
-    return a.d <= q;
-}
-
 static void clr()
 {
     int c;
@@ -74,26 +63,27 @@ static void fr(long z, NGAY &a)
 void nhap(NGAY &a)
 {
     while (1) {
-        while (1) {
-            printf("nhap ngay : ");
-            if (scanf("%hu", &a.d) == 1 && a.d >= 1 && a.d <= 31)
+        printf("nhap ngay : ");
+        if (scanf("%hu", &a.d) == 1 && a.d >= 1 && a.d <= 31)
+            break;
+        clr();
+    }
+    while (1) {
+        printf("nhap thang : ");
+        if (scanf("%hu", &a.m) == 1 && a.m >= 1 && a.m <= 12) {
+            if ((a.d != 31 || (a.m != 4 && a.m != 6 && a.m != 9 && a.m != 11))
+                && !(a.m == 2 && a.d > 29))
                 break;
-            clr();
         }
-        while (1) {
-            printf("nhap thang : ");
-            if (scanf("%hu", &a.m) == 1 && a.m >= 1 && a.m <= 12)
-                break;
-            clr();
+        clr();
+    }
+    while (1) {
+        printf("nhap nam : ");
+        if (scanf("%hu", &a.y) == 1 && a.y >= 1 && a.y <= 60000) {
+            if (!(a.m == 2 && a.d == 29) || lp(a.y))
+                return;
         }
-        while (1) {
-            printf("nhap nam : ");
-            if (scanf("%hu", &a.y) == 1 && a.y >= 1 && a.y <= 60000)
-                break;
-            clr();
-        }
-        if (vd(a))
-            return;
+        clr();
     }
 }
 
