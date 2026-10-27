@@ -14,19 +14,19 @@ bool inc(NGAY &a, int k);
 bool dec(NGAY &a, int k);
 void compute(NGAY a, NGAY b);
 
-static int lp(int y)
+int lp(int y)
 {
     return y % 400 == 0 || (y % 4 == 0 && y % 100 != 0);
 }
 
-static void clr()
+void clr()
 {
     int c;
     while ((c = getchar()) != '\n' && c != EOF)
         ;
 }
 
-static int mt(const char *s, const char *t, int n)
+int mt(const char *s, const char *t, int n)
 {
     int i = 0;
     while (i < n && s[i] && s[i] == t[i])
@@ -34,7 +34,7 @@ static int mt(const char *s, const char *t, int n)
     return i == n;
 }
 
-static long ds(NGAY a)
+long ds(NGAY a)
 {
     long y = a.y - (a.m <= 2);
     long era = (y >= 0 ? y : y - 399) / 400;
@@ -44,7 +44,7 @@ static long ds(NGAY a)
     return era * 146097 + doe - 719468;
 }
 
-static void fr(long z, NGAY &a)
+void fr(long z, NGAY &a)
 {
     z += 719468;
     long era = (z >= 0 ? z : z - 146096) / 146097;
