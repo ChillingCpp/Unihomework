@@ -15,7 +15,7 @@ static void cap(char *s)
     int n = (int)strlen(s);
     int nw = 1;
     for (int i = 0; i < n; i++) {
-        if (s[i] == ' ')
+        if (isspace(s[i]))
             nw = 1;
         else if (nw) {
             s[i] = (char)std::toupper((unsigned char)s[i]);

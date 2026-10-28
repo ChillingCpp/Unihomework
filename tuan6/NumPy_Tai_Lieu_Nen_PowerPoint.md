@@ -64,9 +64,9 @@ Sau bài thuyết trình, người học có thể:
 
 ### Slide 4 — NumPy giải quyết vấn đề gì?
 - **Mục tiêu:** Cho thấy động cơ sử dụng.
-- **Ý chính:** Dữ liệu số lớn; list chứa object và cần vòng lặp Python; NumPy lưu dữ liệu đồng nhất, xử lý bằng code C đã biên dịch; code ngắn, gần ký hiệu toán.
-- **Code:** `[1, 2, 3, 4] * 2` vs `np.array([1, 2, 3, 4]) * 2`.
-- **Vẽ PowerPoint:** hai làn: “vòng lặp Python” nhiều bước vs “vector hóa” một mũi tên.
+- **Ý chính:** Dữ liệu số lớn; Python thuần phải lặp từng phần tử; NumPy lưu dữ liệu đồng nhất, xử lý bằng code C đã biên dịch; code ngắn, gần ký hiệu toán.
+- **Code:** Cộng 0,5 điểm thưởng cho `8.0, 7.5, 9.0, 6.5, 8.5`: `[x + 0.5 for x in d]` vs `d + 0.5`.
+- **Vẽ PowerPoint:** hai làn: “Cách thủ công” (comprehension lặp từng phần tử) vs “Với NumPy” (một phép cộng cho cả mảng).
 - **Nguồn:** [1], [2]
 
 ### Slide 5 — `ndarray` — đối tượng trung tâm
@@ -233,20 +233,19 @@ import numpy as np
 
 Vấn đề thứ nhất là **biểu diễn dữ liệu số nhiều chiều**. List Python chứa các đối tượng rời rạc, có thể khác kiểu; NumPy lưu một khối dữ liệu đồng nhất, kích thước cố định, thường liền mạch trong bộ nhớ. Nhờ đó phép toán chạy bằng vòng lặp C thay vì vòng lặp Python [1].
 
-Vấn đề thứ hai là **độ ngắn gọn**. Thay vì lặp từng cặp phần tử, ta viết một biểu thức:
+Vấn đề thứ hai là **độ ngắn gọn**. Cùng bài toán cộng 0,5 điểm thưởng cho cả lớp, nếu viết Python thuần ta phải lặp từng phần tử; với NumPy, một phép cộng áp dụng cho cả mảng:
 
 ```python
 import numpy as np
 
-a = np.array([1, 2, 3, 4])
-b = np.array([10, 20, 30, 40])
-print(a + b)
+d = np.array([8.0, 7.5, 9.0, 6.5, 8.5])
+print(d + 0.5)
 ```
 
 Kết quả:
 
 ```text
-[11 22 33 44]
+[8.5 8.  9.5 7.  9. ]
 ```
 
 Vấn đề thứ ba là **tính toán trên toàn mảng**: `np.sum()`, `np.mean()`, `np.min()`, `np.max()` cho phép thống kê mà không cần tự viết vòng lặp.

@@ -1,0 +1,469 @@
+{
+  "pptx": "C:\\Users\\Admin\\Desktop\\baitap\\tuan6\\pptx-build\\presentation.pptx",
+  "generated_at": "2026-10-25T14:25:07.871674+00:00",
+  "file_size_bytes": 1397110,
+  "zip_ok": true,
+  "bad_zip_member": null,
+  "slide_count": 25,
+  "slide_size_inches": {
+    "width": 13.33299978127734,
+    "height": 7.5
+  },
+  "aspect_ratio": 1.7777,
+  "media": [
+    {
+      "name": "ppt/media/",
+      "bytes": 0
+    },
+    {
+      "name": "ppt/media/image-1-1.png",
+      "bytes": 38842
+    }
+  ],
+  "fonts": {
+    "Consolas": 1205,
+    "Segoe UI": 310
+  },
+  "slides": [
+    {
+      "index": 1,
+      "title": "Tìm hiểu thư viện",
+      "text_chars": 167,
+      "pictures": 1,
+      "tables": 0,
+      "charts": 0,
+      "page_number": null,
+      "notes_chars": 187
+    },
+    {
+      "index": 2,
+      "title": "Sáu chặng của bài thuyết trình",
+      "text_chars": 496,
+      "pictures": 0,
+      "tables": 0,
+      "charts": 0,
+      "page_number": "02 / 25",
+      "notes_chars": 128
+    },
+    {
+      "index": 3,
+      "title": "NumPy là gì?",
+      "text_chars": 447,
+      "pictures": 0,
+      "tables": 0,
+      "charts": 0,
+      "page_number": "03 / 25",
+      "notes_chars": 210
+    },
+    {
+      "index": 4,
+      "title": "NumPy giải quyết vấn đề gì?",
+      "text_chars": 339,
+      "pictures": 0,
+      "tables": 0,
+      "charts": 0,
+      "page_number": "04 / 25",
+      "notes_chars": 192
+    },
+    {
+      "index": 5,
+      "title": "ndarray — đối tượng trung tâm",
+      "text_chars": 476,
+      "pictures": 0,
+      "tables": 0,
+      "charts": 0,
+      "page_number": "05 / 25",
+      "notes_chars": 191
+    },
+    {
+      "index": 6,
+      "title": "Ưu điểm và giới hạn",
+      "text_chars": 700,
+      "pictures": 0,
+      "tables": 0,
+      "charts": 0,
+      "page_number": "06 / 25",
+      "notes_chars": 189
+    },
+    {
+      "index": 7,
+      "title": "Ứng dụng thực tế",
+      "text_chars": 491,
+      "pictures": 0,
+      "tables": 0,
+      "charts": 0,
+      "page_number": "07 / 25",
+      "notes_chars": 109
+    },
+    {
+      "index": 8,
+      "title": "Python list và NumPy array",
+      "text_chars": 357,
+      "pictures": 0,
+      "tables": 1,
+      "charts": 0,
+      "page_number": "08 / 25",
+      "notes_chars": 176
+    },
+    {
+      "index": 9,
+      "title": "0-D, 1-D, 2-D và nhiều chiều",
+      "text_chars": 440,
+      "pictures": 0,
+      "tables": 0,
+      "charts": 0,
+      "page_number": "09 / 25",
+      "notes_chars": 186
+    },
+    {
+      "index": 10,
+      "title": "Bốn thuộc tính quan trọng",
+      "text_chars": 376,
+      "pictures": 0,
+      "tables": 0,
+      "charts": 0,
+      "page_number": "10 / 25",
+      "notes_chars": 187
+    },
+    {
+      "index": 11,
+      "title": "Ba hàm cơ bản: array, zeros, ones",
+      "text_chars": 473,
+      "pictures": 0,
+      "tables": 0,
+      "charts": 0,
+      "page_number": "11 / 25",
+      "notes_chars": 169
+    },
+    {
+      "index": 12,
+      "title": "Dãy theo bước và chia đều: arange, linspace, eye",
+      "text_chars": 444,
+      "pictures": 0,
+      "tables": 1,
+      "charts": 0,
+      "page_number": "12 / 25",
+      "notes_chars": 182
+    },
+    {
+      "index": 13,
+      "title": "Indexing và slicing mảng 1-D",
+      "text_chars": 539,
+      "pictures": 0,
+      "tables": 0,
+      "charts": 0,
+      "page_number": "13 / 25",
+      "notes_chars": 184
+    },
+    {
+      "index": 14,
+      "title": "Indexing mảng 2-D: hàng, cột, khối con",
+      "text_chars": 767,
+      "pictures": 0,
+      "tables": 0,
+      "charts": 0,
+      "page_number": "14 / 25",
+      "notes_chars": 151
+    },
+    {
+      "index": 15,
+      "title": "Boolean indexing: lọc theo điều kiện",
+      "text_chars": 621,
+      "pictures": 0,
+      "tables": 0,
+      "charts": 0,
+      "page_number": "15 / 25",
+      "notes_chars": 196
+    },
+    {
+      "index": 16,
+      "title": "reshape() và .T: cùng dữ liệu, khác hình dạng",
+      "text_chars": 489,
+      "pictures": 0,
+      "tables": 0,
+      "charts": 0,
+      "page_number": "16 / 25",
+      "notes_chars": 168
+    },
+    {
+      "index": 17,
+      "title": "Phép toán theo từng phần tử",
+      "text_chars": 552,
+      "pictures": 0,
+      "tables": 0,
+      "charts": 0,
+      "page_number": "17 / 25",
+      "notes_chars": 150
+    },
+    {
+      "index": 18,
+      "title": "Toán tử * và @ khác nhau thế nào?",
+      "text_chars": 324,
+      "pictures": 0,
+      "tables": 1,
+      "charts": 0,
+      "page_number": "18 / 25",
+      "notes_chars": 157
+    },
+    {
+      "index": 19,
+      "title": "Hàm tổng hợp và ý nghĩa của axis",
+      "text_chars": 457,
+      "pictures": 0,
+      "tables": 1,
+      "charts": 0,
+      "page_number": "19 / 25",
+      "notes_chars": 182
+    },
+    {
+      "index": 20,
+      "title": "Broadcasting: tính giữa các shape khác nhau",
+      "text_chars": 634,
+      "pictures": 0,
+      "tables": 0,
+      "charts": 0,
+      "page_number": "20 / 25",
+      "notes_chars": 221
+    },
+    {
+      "index": 21,
+      "title": "Broadcasting: thành công và thất bại",
+      "text_chars": 838,
+      "pictures": 0,
+      "tables": 0,
+      "charts": 0,
+      "page_number": "21 / 25",
+      "notes_chars": 175
+    },
+    {
+      "index": 22,
+      "title": "Ví dụ 1 — Thống kê điểm kiểm tra",
+      "text_chars": 754,
+      "pictures": 0,
+      "tables": 0,
+      "charts": 0,
+      "page_number": "22 / 25",
+      "notes_chars": 164
+    },
+    {
+      "index": 23,
+      "title": "Ví dụ 2 — Chuẩn hóa và thay vòng lặp",
+      "text_chars": 788,
+      "pictures": 0,
+      "tables": 0,
+      "charts": 0,
+      "page_number": "23 / 25",
+      "notes_chars": 167
+    },
+    {
+      "index": 24,
+      "title": "Ba điều cần nhớ về NumPy",
+      "text_chars": 655,
+      "pictures": 0,
+      "tables": 0,
+      "charts": 0,
+      "page_number": "24 / 25",
+      "notes_chars": 185
+    },
+    {
+      "index": 25,
+      "title": "Nguồn và hướng tìm hiểu tiếp",
+      "text_chars": 1309,
+      "pictures": 0,
+      "tables": 0,
+      "charts": 0,
+      "page_number": "25 / 25",
+      "notes_chars": 225
+    }
+  ],
+  "issues": [
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 3,
+      "message": "Text below 8.5 pt in 'Text 24' (8.0 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 8,
+      "message": "Text below 8.5 pt in 'Text 11' (8.0 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 9,
+      "message": "Text below 8.5 pt in 'Text 50' (8.0 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 10,
+      "message": "Text below 8.5 pt in 'Text 30' (8.0 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 11,
+      "message": "Text below 8.5 pt in 'Text 14' (8.0 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 11,
+      "message": "Text below 8.5 pt in 'Text 27' (8.0 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 11,
+      "message": "Text below 8.5 pt in 'Text 40' (8.0 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 12,
+      "message": "Text below 8.5 pt in 'Text 11' (8.0 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "POSSIBLE_OVERFLOW",
+      "slide": 12,
+      "message": "'Text 12' may overflow: needs ~1.50 in for 1.33 in available"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 13,
+      "message": "Text below 8.5 pt in 'Text 38' (8.0 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 14,
+      "message": "Text below 8.5 pt in 'Text 107' (8.0 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 15,
+      "message": "Text below 8.5 pt in 'Text 75' (8.0 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 16,
+      "message": "Text below 8.5 pt in 'Text 57' (8.0 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 17,
+      "message": "Text below 8.5 pt in 'Text 33' (8.0 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 18,
+      "message": "Text below 8.5 pt in 'Text 71' (8.0 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 19,
+      "message": "Text below 8.5 pt in 'Text 17' (8.0 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 19,
+      "message": "Text below 8.5 pt in 'Text 19' (8.0 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 19,
+      "message": "Text below 8.5 pt in 'Text 32' (8.0 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 21,
+      "message": "Text below 8.5 pt in 'Text 17' (8.2 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 21,
+      "message": "Text below 8.5 pt in 'Text 27' (8.0 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 21,
+      "message": "Text below 8.5 pt in 'Text 28' (8.2 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 22,
+      "message": "Text below 8.5 pt in 'Text 12' (8.0 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 22,
+      "message": "Text below 8.5 pt in 'Text 38' (8.0 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 23,
+      "message": "Text below 8.5 pt in 'Text 13' (8.0 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 23,
+      "message": "Text below 8.5 pt in 'Text 26' (8.0 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 25,
+      "message": "Text below 8.5 pt in 'Text 6' (8.3 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 25,
+      "message": "Text below 8.5 pt in 'Text 9' (8.3 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 25,
+      "message": "Text below 8.5 pt in 'Text 12' (8.3 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 25,
+      "message": "Text below 8.5 pt in 'Text 15' (8.3 pt)"
+    },
+    {
+      "severity": "warning",
+      "code": "TINY_TEXT",
+      "slide": 25,
+      "message": "Text below 8.5 pt in 'Text 18' (8.3 pt)"
+    }
+  ],
+  "summary": {
+    "errors": 0,
+    "warnings": 30,
+    "by_code": {
+      "TINY_TEXT": 29,
+      "POSSIBLE_OVERFLOW": 1
+    }
+  }
+}
