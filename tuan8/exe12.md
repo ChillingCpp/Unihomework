@@ -165,6 +165,7 @@ bool search(const int a[], int n, int key)
 
   return false;
 }
+
 ```
 
 ## Exercise 8
