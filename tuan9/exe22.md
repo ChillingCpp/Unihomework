@@ -2,6 +2,8 @@
 
 *(Programming Projects skipped as requested.)*
 
+> **Quy ước:** Các bài yêu cầu viết hoặc sửa mã xử lý file (bài 3, 10, 12–15) được trả lời bằng **C++17** với `<fstream>` và cơ chế RAII. Đề bài gốc vẫn được giữ nguyên.
+
 ## Exercise 1 (Section 22.1)
 
 **Đề:** Indicate whether each of the following files is more likely to contain text data or binary data:
@@ -51,20 +53,20 @@ if (fp = fopen(filename, "r")) {
 fclose(fp);
 ```
 
-**Đáp án:**
+**Đáp án (C++):**
 
-Lỗi: nếu `fopen` thất bại, `fp` bằng `NULL`, nhưng `fclose(fp)` vẫn được gọi ở ngoài khối `if`. Gọi `fclose(NULL)` là hành vi không xác định.
+Lỗi: nếu mở file thất bại, `fp` không hợp lệ nhưng `fclose(fp)` vẫn được gọi ở ngoài khối `if`. Trong C++, không cần đóng file thủ công: `std::ifstream` tự đóng khi ra khỏi phạm vi (RAII). Chỉ cần kiểm tra việc mở file trước khi đọc.
 
-Sửa:
-
-```c
+```cpp
 FILE *fp;
 
-if ((fp = fopen(filename, "r")) != NULL) {
-    /* read characters until end-of-file */
-    fclose(fp);
+if (fp = fopen(filename, "r")) {
+    read characters until end-of-file
+    fclose(fp); 
 }
 ```
+
+Nếu vẫn muốn đóng thủ công, đặt `fp.close()` **bên trong** nhánh mở file thành công; không gọi khi mở thất bại.
 
 ## Exercise 4 (Section 22.3) (W)
 
@@ -118,7 +120,7 @@ otherwise, where `n` is the value of `widget`. You are not allowed to use the `i
 **Đáp án:**
 
 ```c
-printf("%d widget%s\n", widget,  widget == 1 ? "" : "s");
+printf("%d widget%s\n", widget, widget == 1 ? "" : "s");
 ```
 
 ## Exercise 7
@@ -179,18 +181,48 @@ Cả hai đọc một ký tự không trắng, nhưng `%1s` lưu dưới dạng 
 
 **Đề:** The `fcopy.c` program has one minor flaw: it doesn't check for errors as it's writing to the destination file. Errors during writing are rare, but do occasionally occur (the disk might become full, for example). Show how to add the missing error check to the program, assuming that we want it to display a message and terminate immediately if an error occurs.
 
-**Đáp án:**
+**Đáp án (C++):**
 
-```c
-while ((ch = getc(source_fp)) != EOF) {
-    if (putc(ch, dest_fp) == EOF) {
-        fprintf(stderr, "Error writing to %s\n", argv[2]);
-        fclose(source_fp);
-        fclose(dest_fp);
-        exit(EXIT_FAILURE);
+Thay `getc`/`putc` bằng `std::ifstream::get` và `std::ofstream::put`. Sau mỗi lần ghi, kiểm tra `!dest`; nếu lỗi, báo ra `std::cerr` và kết thúc ngay.
+
+```cpp
+#include <cstdlib>
+#include <fstream>
+#include <iostream>
+
+int main(int argc, char* argv[])
+{
+    if (argc != 3) {
+        std::cerr << "Usage: fcopy <source> <destination>\n";
+        return EXIT_FAILURE;
     }
+
+    std::ifstream source(argv[1], std::ios::binary);
+    std::ofstream dest(argv[2], std::ios::binary);
+    if (!source || !dest) {
+        std::cerr << "Cannot open file\n";
+        return EXIT_FAILURE;
+    }
+
+    char ch;
+    while (source.get(ch)) {
+        dest.put(ch);
+        if (!dest) {
+            std::cerr << "Error writing to " << argv[2] << '\n';
+            return EXIT_FAILURE;
+        }
+    }
+
+    if (source.bad()) {
+        std::cerr << "Error reading from " << argv[1] << '\n';
+        return EXIT_FAILURE;
+    }
+
+    return EXIT_SUCCESS;
 }
 ```
+
+Nếu đặt đoạn sao chép trong một hàm khác, dùng `std::exit(EXIT_FAILURE)` sau khi báo lỗi nếu muốn dừng ngay toàn chương trình.
 
 ## Exercise 11
 
@@ -242,27 +274,23 @@ int count_periods(const char *filename)
 }
 ```
 
-**Đáp án:**
+**Đáp án (C++):**
 
-Lỗi: mỗi lần lặp gọi `fgetc` hai lần. Ký tự đọc trong điều kiện `while` bị bỏ qua, nên hàm chỉ kiểm tra các ký tự ở vị trí lẻ.
+Lỗi: mỗi lần lặp gọi `get` hai lần. Ký tự đọc trong điều kiện `while` bị bỏ qua, nên hàm chỉ kiểm tra các ký tự ở vị trí lẻ.
 
 Sửa:
 
-```c
+```cpp
 int count_periods(const char *filename)
 {
     FILE *fp;
     int n = 0;
-    int ch;
-
     if ((fp = fopen(filename, "r")) != NULL) {
-        while ((ch = fgetc(fp)) != EOF) {
+        while ((ch = fgetc(fp)) != EOF)
             if (ch == '.')
                 n++;
-        }
         fclose(fp);
     }
-
     return n;
 }
 ```
@@ -277,40 +305,38 @@ int line_length(const char *filename, int n);
 
 The function should return the length of line `n` in the text file whose name is `filename` (assuming that the first line in the file is line 1). If the line doesn't exist, the function should return 0.
 
-**Đáp án:**
+**Đáp án (C++):**
 
-```c
-int line_length(const char *filename, int n)
+```cpp
+#include <fstream>
+#include <string>
+
+int line_length(const char* filename, int n)
 {
-    FILE *fp;
-    int ch;
-    int line = 1;
-    int length = 0;
-
-    if (filename == NULL || n < 1)
+    if (filename == nullptr || n < 1)
         return 0;
 
-    fp = fopen(filename, "r");
-    if (fp == NULL)
+    std::ifstream fp(filename);
+    if (!fp) 
         return 0;
 
-    while ((ch = fgetc(fp)) != EOF) {
-        if (line == n) {
-            if (ch == '\n') {
-                fclose(fp);
-                return length;
-            }
-            if (ch != '\r')
-                length++;
-        } else if (ch == '\n') {
-            line++;
+    std::string line;
+    int current = 1;
+
+    while (std::getline(fp, line)) {
+        if (current == n) {
+            if (!line.empty() && line.back() == '\r')
+                line.pop_back();
+            return (int)line.size();
         }
+        ++current;
     }
 
-    fclose(fp);
-    return (line == n) ? length : 0;
+    return 0;
 }
 ```
+
+`std::getline` bỏ ký tự `'\n'`; nếu file dùng CRLF, hàm bỏ thêm `'\r'` ở cuối dòng. Hàm trả về 0 nếu dòng không tồn tại hoặc dòng rỗng.
 
 ## Exercise 14 (Section 22.5) (W)
 
@@ -320,52 +346,46 @@ int line_length(const char *filename, int n)
 
 (b) Write your own version of `fputs`, following the same rules as in part (a).
 
-**Đáp án:**
+**Đáp án (C++):**
 
-```c
-char *my_fgets(char *s, int n, FILE *stream)
+Trong C++, không cần mảng `char` kết thúc bằng `'\0'`; dùng `std::string` và `std::istream`/`std::ostream`. Hai hàm dưới giữ các ý chính của `fgets`/`fputs`: đọc tối đa `n - 1` ký tự, dừng sau newline, trả về `bool` cho biết có đọc/ghi thành công hay không.
+
+```cpp
+#include <istream>
+#include <ostream>
+#include <string>
+
+bool my_fgets(std::istream& in, std::string& s, int n)
 {
-    int ch;
-    int i = 0;
+    s.clear();
+    if (n <= 1) {
+        return false;
+    }
 
-    if (s == NULL || stream == NULL || n <= 0)
-        return NULL;
-
-    while (i < n - 1) {
-        ch = fgetc(stream);
-
-        if (ch == EOF) {
-            if (ferror(stream))
-                return NULL;
-            if (i == 0)
-                return NULL;
+    char ch;
+    while (s.size() <  (std::size_t) n-1 && in.get(ch)) {
+        s.push_back(ch);
+        if (ch == '\n') {
             break;
         }
-
-        s[i++] = (char)ch;
-
-        if (ch == '\n')
-            break;
     }
 
-    s[i] = '\0';
-    return s;
+    if (in.bad()) {
+        return false;
+    }
+    return !s.empty();
 }
 
-int my_fputs(const char *s, FILE *stream)
+bool my_fputs(std::ostream& out, const std::string& s)
 {
-    if (s == NULL || stream == NULL)
-        return EOF;
-
-    while (*s != '\0') {
-        if (putc((unsigned char)*s, stream) == EOF)
-            return EOF;
-        s++;
-    }
-
-    return 0;
+    out.write(s.data(), (std::streamsize) s.size());
+    return (bool) out;
 }
 ```
+
+- `my_fgets` giữ newline nếu gặp newline (giống `fgets`), không thêm `'\0'` vì `std::string` tự quản lý kích thước.
+- `my_fputs` ghi đúng toàn bộ nội dung chuỗi, không tự thêm newline (giống `fputs`).
+- Trả về `false` khi không đọc/ghi được; `true` khi thành công.
 
 ## Exercise 15 (Section 22.7) (W)
 
@@ -376,13 +396,26 @@ int my_fputs(const char *s, FILE *stream)
 (c) Move forward one record.  
 (d) Move backward two records.
 
-**Đáp án:**
+**Đáp án (C++):**
 
-```c
-/* (a) */ fseek(fp, (long)n * 64L, SEEK_SET);
-/* (b) */ fseek(fp, -64L, SEEK_END);
-/* (c) */ fseek(fp, 64L, SEEK_CUR);
-/* (d) */ fseek(fp, -128L, SEEK_CUR);
+Giả sử `fp` là `std::ifstream` (hoặc `std::fstream`) đã mở ở chế độ binary:
+
+```cpp
+#include <fstream>
+
+std::ifstream fp("data.bin", std::ios::binary);
+
+// (a) đầu record n
+fp.seekg((std::streamoff) n * 64, std::ios::beg);
+
+// (b) đầu record cuối
+fp.seekg(-64, std::ios::end);
+
+// (c) tiến một record
+fp.seekg(64, std::ios::cur);
+
+// (d) lùi hai record
+fp.seekg(-128, std::ios::cur);
 ```
 
 ## Exercise 16 (Section 22.8)
