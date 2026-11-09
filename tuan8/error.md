@@ -1,213 +1,104 @@
-# Kết quả kiểm tra code practice8.1–8.5
+# Kết quả kiểm tra code practice8.1–8.3
 
-## Phạm vi kiểm tra
+## Phạm vi và cách kiểm tra
 
-- Đã đọc source trong `practice8.1`, `practice8.2`, `practice8.3`.
-- `practice8.4` và `practice8.5` hiện chỉ có file markdown, không có file `.cpp`/`.h`, nên không có code C++ để kiểm tra.
-- Đã compile bằng `g++ 15.2.0` với `-std=c++17 -Wall -Wextra -pedantic` và chạy thử các input mẫu/edge case.
-- Không sửa file nào trong 5 folder.
+- Đã đọc lại source hiện tại trong `practice8.1`, `practice8.2`, `practice8.3`.
+- Đã compile từng bài bằng `g++ 15.2.0` với `-std=c++17 -Wall -Wextra -pedantic`.
+- Đã chạy input mẫu và các edge case; binary/test tạm đặt ngoài các folder bài tập.
+- Không sửa file nào trong `practice8.1`–`practice8.5`.
+- `add_strings` của practice8.2 là implementation cố ý **chỉ cộng thêm 1** theo đề bài; đây không phải lỗi và không bị yêu cầu viết thành hàm cộng hai số tổng quát.
 
-## Tổng hợp lỗi
+## Các lỗi đã được sửa / hiện đã ổn
 
-| Mức | File | Lỗi |
-|---|---|---|
-| Cao | `practice8.1/replace_words.cpp` | Mất phần đuôi sau lần khớp cuối; không khớp thì trả về chuỗi rỗng |
-| Cao | `practice8.1/replace_words.cpp` | Tìm chồng lấn (`p + 1`) gây sai kết quả và có thể append với độ dài âm |
-| Trung bình | `practice8.1/replace_words.cpp` | Dùng `int` cho `find()`/`npos`, không an toàn với chuỗi dài |
-| Cao | `practice8.2/big_number.cpp` | `std::isdigit(static_cast<char>(...))` có thể là hành vi không xác định với byte UTF-8/ký tự âm |
-| Thấp | `practice8.2/big_number.cpp` | Cảnh báo signed/unsigned khi so sánh chỉ số với `std::string::size_type` |
-| Nghiêm trọng | `practice8.3/paragraph.cpp` | Gặp EOF sẽ lặp vô hạn |
-| Trung bình | `practice8.3/paragraph.cpp` | Dùng `char` cho `getchar()` nên không phân biệt được EOF; thiếu `<cstdio>` |
-| Thấp | `practice8.3/paragraph.cpp` | In thêm dòng trống trước và sau đoạn văn |
-| Thấp | `practice8.3/paragraph.cpp` | Chỉ dừng khi `.` đứng ngay trước `\n`, không dừng nếu có khoảng trắng sau dấu chấm |
+- `practice8.1`: đã nối phần đuôi sau lần khớp cuối; không tìm thấy thì trả lại nguyên câu; match chồng lấn đã đúng; có chặn `find` rỗng. `prev` đã đổi sang `std::string::size_type`, không còn cảnh báo signed/unsigned.
+  - `the good, the bad, the ugly` / `the` / `(a very)` → `(a very) good, (a very) bad, (a very) ugly`.
+  - `abc abc` / `zzz` / `X` → `abc abc`.
+  - `aaaa` / `aa` / `b` → `bb`.
+  - `abc` / chuỗi tìm rỗng / `X` → `abc` (không lỗi).
+- `practice8.2`: `std::isdigit` đã cast sang `unsigned char`, không còn lỗi UB do byte âm ở vị trí này.
+  - `there are 9 cats and 19 dogs.` → `there are 10 cats and 20 dogs.`
+  - `9 99 999 0009` → `10 100 1000 0010`.
+  - `999` → `1000`; `a1b22c333d` → `a2b23c334d`.
+- `practice8.3`: đã thêm kiểm tra `EOF`; input rỗng không còn treo. Logic `pv` hiện cập nhật theo ký tự không phải khoảng trắng, nên đã dừng đúng cả khi đoạn văn có dấu cách.
+  - `Hello.` + newline → chỉ đọc `Hello.`.
+  - `Hello world.` + newline + dòng khác → chỉ đọc `Hello world.`.
+  - `Hello world.  ` + newline (có khoảng trắng sau dấu chấm) → vẫn dừng đúng.
+  - `Hello world.` + EOF (không có newline) → đọc hết và kết thúc bình thường.
+- `practice8.4` và `practice8.5`: chỉ có file markdown, không có source C++ để kiểm tra.
 
----
+## Lỗi còn lại
 
-## 1. `practice8.1/replace_words.cpp`
+### 1. `practice8.3/paragraph.cpp` — in thêm dòng trống (lỗi thấp)
 
-### 1.1. Mất phần còn lại sau lần khớp cuối — lỗi cao
-
-Vị trí: `replace_words.cpp:9-16`.
-
-Vòng lặp chỉ nối các đoạn **trước** mỗi lần khớp, nhưng sau khi vòng lặp kết thúc không hề nối đoạn còn lại của `source` từ `prev` đến hết chuỗi.
-
-Hệ quả:
-
-- Không tìm thấy `find`: vòng lặp không chạy, `result` rỗng, hàm trả về chuỗi rỗng thay vì trả lại `source`.
-- Có tìm thấy: phần sau lần khớp cuối bị mất.
-
-Ví dụ với input mẫu:
-
-```text
-S = the good, the bad, the ugly
-F = the
-R = (a very)
-```
-
-Kết quả thực tế:
-
-```text
-(a very) good, (a very) bad, (a very)
-```
-
-Kết quả đúng phải còn phần ` ugly`:
-
-```text
-(a very) good, (a very) bad, (a very) ugly
-```
-
-Ví dụ không khớp:
-
-```text
-S = abc abc
-F = zzz
-R = X
-```
-
-Kết quả thực tế: chuỗi rỗng. Kết quả đúng: `abc abc`.
-
-Hướng sửa: sau vòng lặp phải append đoạn `source` từ `prev` đến hết; nếu không có lần khớp nào thì trả lại `source`.
-
-### 1.2. Tìm chồng lấn làm sai kết quả — lỗi cao
-
-Vị trí: `replace_words.cpp:9-13`.
-
-Vòng lặp tìm lần tiếp theo bằng `source.find(find, p + 1)` thay vì tìm từ `prev` (vị trí sau lần khớp trước). Với `find` dài hơn 1 ký tự, lần tìm sau có thể rơi vào bên trong lần khớp trước. Khi đó `p < prev`, biểu thức `p - prev` là số âm nhưng được truyền vào `std::string::append` dưới dạng `size_type`, thành một giá trị rất lớn.
-
-Ví dụ:
-
-```text
-S = aaaa
-F = aa
-R = b
-```
-
-Kết quả thực tế:
-
-```text
-baabab
-```
-
-Trong khi cách thay thế không chồng lấn thông thường phải cho:
-
-```text
-bb
-```
-
-Đây không chỉ là sai kết quả mà còn là vùng hành vi không xác định/nguy hiểm do độ dài âm khi append.
-
-Hướng sửa: sau mỗi lần khớp, đặt `prev = p + find.size()` và lần tìm tiếp theo phải bắt đầu từ `prev`, không phải `p + 1`.
-
-### 1.3. Dùng `int` cho kết quả `find()` và `npos` — lỗi trung bình
-
-Vị trí: `replace_words.cpp:9-10`.
-
-`std::string::find()` trả về `std::string::size_type` (`size_t`), còn code lưu vào `int` và so sánh với `-1`. Việc `npos` chuyển thành `-1` không được chuẩn C++ bảo đảm; với chuỗi dài hơn `INT_MAX` còn bị tràn. Nên dùng `std::string::size_type` và so sánh với `std::string::npos`.
-
----
-
-## 2. `practice8.2/big_number.cpp`
-
-### 2.1. `std::isdigit` nhận `char` có thể âm — lỗi cao
-
-Vị trí: `big_number.cpp:29` và `big_number.cpp:33`.
-
-Code đang dùng:
+Vị trí: `paragraph.cpp:19`.
 
 ```cpp
-std::isdigit(static_cast<char>(sentence[i]))
+std::cout << s << '\n';
 ```
 
-Theo chuẩn C++, đối số của `std::isdigit` phải là giá trị biểu diễn được dưới dạng `unsigned char`, hoặc `EOF`. Nếu `char` là signed và gặp byte UTF-8/tiếng Việt có giá trị > 127, giá trị truyền vào có thể âm, gây hành vi không xác định.
-
-Hướng sửa: dùng `std::isdigit(static_cast<unsigned char>(sentence[i]))`.
-
-### 2.2. Ghi chú: `add_strings` cộng thêm 1 là đúng thiết kế — không phải lỗi
-
-Vị trí: `big_number.cpp:5-20`, khai báo `big_number.h:8`.
-
-Theo yêu cầu bài 8.2, mỗi số chỉ cần tăng thêm `1`. Hàm nhận một chuỗi và luôn cộng `"1"` là implementation chuyên dụng cho đúng đề bài; không cần viết hàm cộng hai số tổng quát. Vì vậy không xem đây là lỗi.
-
-Hàm chỉ được gọi từ `increase_numbers` với cụm chữ số không rỗng, nên việc không kiểm tra chuỗi rỗng/không phải chữ số không phải lỗi trong luồng hiện tại. Nếu sau này dùng lại như một API công khai cho dữ liệu tùy ý thì mới cần bổ sung kiểm tra.
-
-### 2.3. Cảnh báo signed/unsigned — lỗi thấp
-
-Vị trí: `big_number.cpp:27` và `big_number.cpp:33`.
-
-Trình biên dịch cảnh báo:
+`s` đã chứa ký tự newline của input (trường hợp bình thường kết thúc bằng `.` + newline), nên output có thêm một dòng trống sau đoạn văn. Với input `Hello.` + newline, output thực tế là:
 
 ```text
-comparison of integer expressions of different signedness: 'int' and
-'std::string::size_type'
+Hello.
+
 ```
 
-Nên dùng `std::string::size_type`/`std::size_t` cho chỉ số hoặc ép kiểu có kiểm soát.
-
----
-
-## 3. `practice8.3/paragraph.cpp`
-
-### 3.1. Gặp EOF sẽ lặp vô hạn — lỗi nghiêm trọng
-
-Vị trí: `paragraph.cpp:5-14`.
-
-Code không kiểm tra giá trị `EOF` của `getchar()`. Khi input kết thúc mà chưa có dãy `.\n`, `getchar()` trả về `EOF`; giá trị này bị chuyển thành `char`, được push vào `std::string`, rồi vòng lặp tiếp tục gọi `getchar()` mãi mãi. Chương trình không thoát và có thể ngốn bộ nhớ.
-
-Đã kiểm tra thực tế: chạy chương trình với input rỗng/đóng stdin, quá trình không kết thúc sau 5 giây.
-
-Hướng sửa: dùng `int c = std::getchar();`, kiểm tra `c == EOF` và thoát vòng lặp; chỉ push `char` sau khi đã loại EOF.
-
-### 3.2. Dùng `char` cho `getchar()` và thiếu `<cstdio>` — lỗi trung bình
-
-Vị trí: `paragraph.cpp:5`, `paragraph.cpp:13`.
-
-`getchar()` trả về `int` để phân biệt được mọi byte với `EOF`. Lưu ngay vào `char` làm mất thông tin EOF. Ngoài ra `getchar()` thuộc `<cstdio>` nhưng file không include trực tiếp; hiện tại biên dịch được nhờ include gián tiếp, không bảo đảm trên mọi compiler.
-
-### 3.3. In thêm dòng trống — lỗi thấp
-
-Vị trí: `paragraph.cpp:15`.
-
-Code in:
+Nếu đề chỉ yêu cầu in đoạn văn, nên tránh cộng thêm newline khi `s` đã kết thúc bằng `\n`, ví dụ:
 
 ```cpp
-std::cout << '\n' << s << '\n';
+std::cout << s;
+if (s.empty() || s.back() != '\n')
+    std::cout << '\n';
 ```
 
-Vì `s` đã chứa ký tự `\n` kết thúc input, kết quả có thêm dòng trống trước và sau đoạn văn. Với input `Hello` / `world.`, output thực tế có một dòng trống trước `Hello` và một dòng trống sau `world.`. Nếu đề yêu cầu in đúng đoạn văn, đây là lỗi định dạng.
+Đây chỉ là lỗi định dạng, không ảnh hưởng nội dung đoạn văn.
 
-### 3.4. Chỉ dừng khi dấu chấm đứng ngay trước newline — lỗi thấp
+### 2. `practice8.2/big_number.cpp` — cảnh báo signed/unsigned (lỗi thấp)
 
-Vị trí: `paragraph.cpp:10`.
+Vị trí: `big_number.cpp:27`, `big_number.cpp:33`.
 
-Điều kiện:
+Hai vòng lặp dùng `int i` để so sánh với `sentence.size()` (`std::string::size_type`, không dấu), sinh cảnh báo:
+
+```text
+warning: comparison of integer expressions of different signedness:
+'int' and 'std::string::size_type' [-Wsign-compare]
+```
+
+Với chuỗi thông thường, code vẫn chạy đúng. Về mặt lý thuyết, nếu chuỗi dài hơn `INT_MAX`, `int i` có thể tràn. Nên đổi `i` và `start` sang `std::string::size_type`/`std::size_t` để sạch cảnh báo và nhất quán.
+
+### 3. `practice8.2/big_number.cpp` — `add_strings("")` (edge case, lỗi thấp)
+
+Vị trí: `big_number.cpp:9`.
 
 ```cpp
-if (pv == '.' && c == '\n')
+for (int i = t.size() - 1; i >= 0; --i)
 ```
 
-chỉ đúng khi ký tự ngay trước `\n` là `.`. Nếu người dùng nhập `Hello. ` rồi mới xuống dòng (có khoảng trắng sau dấu chấm), chương trình không dừng. Cần làm rõ yêu cầu hoặc bỏ qua khoảng trắng trước khi kiểm tra.
+Nếu `t` rỗng, `t.size() - 1` bị underflow vì `size()` là số không dấu. Đã thử trực tiếp: `add_strings("")` trả về `"1"`, không hợp lý cho input rỗng.
 
----
+Trong luồng `increase_numbers`, `number` luôn là cụm chữ số không rỗng nên lỗi này **chưa lộ ra** khi chạy chương trình chính. Tuy nhiên `add_strings` đang được khai báo public trong `big_number.h`, nên nên thêm:
 
-## 4. `practice8.4` và `practice8.5`
+```cpp
+if (t.empty())
+    return t;
+```
 
-Hiện tại hai folder chỉ có:
+`add_strings` cũng giả định input chỉ gồm chữ số; `add_strings("12a")` cho `"12b"`. Đây không phải lỗi trong luồng hiện tại vì `increase_numbers` chỉ lấy cụm chữ số, nhưng là giới hạn của hàm public.
 
-- `practice8.4/practice8.4.md`
-- `practice8.5/practice8.5.md`
+## Không phải lỗi
 
-Không có file source C++ nên không thể kiểm tra code. Nếu cần kiểm tra code hai bài này, cần đặt lại các file `.cpp`/`.h` vào đúng folder.
-
-Ghi chú thêm ở `practice8.5.md` dòng 12: câu “tổng là 200 byte” đang cộng 80 byte trên stack với 120 byte trên heap. Tổng số byte là 200 nếu chỉ hỏi tổng, nhưng nên tách rõ hai vùng nhớ khác nhau để tránh hiểu nhầm.
-
----
+- `add_strings` chỉ cộng 1 là đúng yêu cầu practice8.2, không cần viết hàm cộng hai chuỗi số tổng quát.
+- `practice8.3` không báo lỗi khi gặp `EOF` trước dấu chấm: đề chỉ yêu cầu đọc đến `.` + newline rồi in đoạn văn, không yêu cầu thông báo lỗi. Việc dừng ở `EOF` và in phần đã đọc là chấp nhận được.
+- `practice8.3` dùng `std::string` nên vẫn đáp ứng yêu cầu “dynamic string”; không cần tự cấp phát bằng `new[]`.
 
 ## Kết luận
 
-Các lỗi cần ưu tiên sửa trước:
+Không còn lỗi nghiêm trọng trong `practice8.1`–`practice8.3`.
 
-1. `practice8.1`: mất phần đuôi và sai khi có match chồng lấn.
-2. `practice8.3`: lặp vô hạn khi gặp EOF.
-3. `practice8.2`: `std::isdigit` với `char` có thể âm.
+Ưu tiên còn lại:
 
-Các vấn đề còn lại là lỗi biên/portability/định dạng. Riêng `add_strings` cộng thêm 1 là thiết kế đúng theo đề bài 8.2, không phải lỗi.
+1. **practice8.3**: bỏ newline thừa khi in — lỗi định dạng thấp.
+2. **practice8.2**: đổi chỉ số vòng lặp sang `std::size_t` — chỉ là cảnh báo/portability.
+3. **practice8.2**: thêm kiểm tra `t.empty()` trong `add_strings` — edge case của hàm public, không ảnh hưởng luồng chính.
+
+Không có file nào trong các folder `practice8.1`–`practice8.5` bị sửa.

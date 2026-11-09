@@ -2,7 +2,8 @@
 
 void read_paragraph()
 {
-    char        pv = '\n', c = std::getchar();
+    char        pv = 'l';
+    int         c  = std::getchar();
     std::string s;
     while (true)
     {
@@ -11,9 +12,9 @@ void read_paragraph()
         s.push_back(c);
         if (pv == '.' && c == '\n')
             break;
-        if (!isspace(pv))
-            pv = c;
+        if (!isspace(c))
+            pv = (char) c;
         c = std::getchar();
     }
-    std::cout << '\n' << s << '\n';
+    std::cout << s << '\n';
 }
