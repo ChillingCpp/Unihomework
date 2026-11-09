@@ -2,8 +2,10 @@
 #define BIG_NUMBER_H
 
 #include <string>
+#include <algorithm>
+#include <utility>
 
-std::string add_strings(const std::string &a, const std::string &b);
-std::string increase_numbers(const std::string &sentence);
+std::string add_strings(const std::string& t);
+std::string increase_numbers(const std::string& sentence);
 
 #endif

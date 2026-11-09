@@ -2,80 +2,43 @@
 
 #include <cctype>
 
-static bool is_digits(const std::string &s)
+std::string add_strings(const std::string& t)
 {
-    if (s.empty())
-        return false;
-
-    for (std::string::size_type i = 0; i < s.size(); ++i) {
-        if (!std::isdigit(static_cast<unsigned char>(s[i])))
-            return false;
+    std::string res;
+    int         c = 1;
+    for (int i = t.size() - 1; i >= 0; --i)
+    {
+        if (t[i] - '0' + c == 10)
+            res.push_back('0'), c = 1;
+        else
+            res.push_back(static_cast<char>(t[i] + c)), c = 0;
     }
-    return true;
+    if (c)
+        res.push_back('1');
+    std::reverse(res.begin(), res.end());
+    return res;
 }
 
-static void reverse_string(std::string &s)
-{
-    for (std::string::size_type i = 0; i < s.size() / 2; ++i) {
-        const char tmp = s[i];
-        s[i] = s[s.size() - 1 - i];
-        s[s.size() - 1 - i] = tmp;
-    }
-}
-
-std::string add_strings(const std::string &a, const std::string &b)
-{
-    if (!is_digits(a) || !is_digits(b))
-        return "";
-
-    std::string result;
-    int i = static_cast<int>(a.size()) - 1;
-    int j = static_cast<int>(b.size()) - 1;
-    int carry = 0;
-
-    while (i >= 0 || j >= 0 || carry != 0) {
-        int sum = carry;
-
-        if (i >= 0)
-            sum += a[i--] - '0';
-        if (j >= 0)
-            sum += b[j--] - '0';
-
-        result.push_back(static_cast<char>('0' + sum % 10));
-        carry = sum / 10;
-    }
-
-    reverse_string(result);
-
-    std::string::size_type first = 0;
-    while (first + 1 < result.size() && result[first] == '0')
-        ++first;
-
-    return result.substr(first);
-}
-
-std::string increase_numbers(const std::string &sentence)
+std::string increase_numbers(const std::string& sentence)
 {
     std::string result;
     result.reserve(sentence.size());
 
-    std::string::size_type i = 0;
-    while (i < sentence.size()) {
-        if (std::isdigit(static_cast<unsigned char>(sentence[i]))) {
+    for (int i = 0; i < sentence.size(); ++i)
+    {
+        if (std::isdigit(static_cast<char>(sentence[i])))
+        {
             const std::string::size_type start = i;
 
-            while (i < sentence.size() &&
-                   std::isdigit(static_cast<unsigned char>(sentence[i]))) {
-                ++i;
-            }
-
-            const std::string number = sentence.substr(start, i - start);
-            const std::string incremented = add_strings(number, "1");
-            result += incremented.empty() ? number : incremented;
-        } else {
-            result.push_back(sentence[i]);
-            ++i;
+            while (i < sentence.size() && std::isdigit(static_cast<char>(sentence[i])))
+                i++;
+            const std::string number      = sentence.substr(start, i - start);
+            const std::string incremented = add_strings(number);
+            result += incremented;
+            i--;
         }
+        else
+            result.push_back(sentence[i]);
     }
 
     return result;

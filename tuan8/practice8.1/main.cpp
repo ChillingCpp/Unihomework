@@ -3,10 +3,10 @@
 
 #include "replace_words.h"
 
-static void strip_cr(std::string &s)
+static void strip_cr(std::string& s)
 {
-    if (!s.empty() && s[s.size() - 1] == '\r')
-        s.erase(s.size() - 1);
+    if (!s.empty() && s.back() == '\r')
+        s.pop_back();
 }
 
 int main()
@@ -16,19 +16,22 @@ int main()
     std::string replace_word;
 
     std::cout << "Enter a sentence = ";
-    if (!std::getline(std::cin, sentence)) {
+    if (!std::getline(std::cin, sentence))
+    {
         std::cerr << "Input error.\n";
         return 1;
     }
 
     std::cout << "Enter find word = ";
-    if (!std::getline(std::cin, find_word)) {
+    if (!std::getline(std::cin, find_word))
+    {
         std::cerr << "Input error.\n";
         return 1;
     }
 
     std::cout << "Enter replacing word = ";
-    if (!std::getline(std::cin, replace_word)) {
+    if (!std::getline(std::cin, replace_word))
+    {
         std::cerr << "Input error.\n";
         return 1;
     }
@@ -37,7 +40,8 @@ int main()
     strip_cr(find_word);
     strip_cr(replace_word);
 
-    if (find_word.empty()) {
+    if (find_word.empty())
+    {
         std::cerr << "Find word must not be empty.\n";
         return 1;
     }

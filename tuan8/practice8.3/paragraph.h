@@ -1,9 +1,8 @@
 #ifndef PARAGRAPH_H
 #define PARAGRAPH_H
 
-#include <istream>
+#include <iostream>
 #include <string>
-
-bool read_paragraph(std::istream &input, std::string &paragraph);
+void read_paragraph();
 
 #endif
