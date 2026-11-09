@@ -11,7 +11,7 @@ std::string add_strings(const std::string& t)
         if (t[i] - '0' + c == 10)
             res.push_back('0'), c = 1;
         else
-            res.push_back(static_cast<char>(t[i] + c)), c = 0;
+            res.push_back(static_cast<unsigned char>(t[i] + c)), c = 0;
     }
     if (c)
         res.push_back('1');
@@ -26,11 +26,11 @@ std::string increase_numbers(const std::string& sentence)
 
     for (int i = 0; i < sentence.size(); ++i)
     {
-        if (std::isdigit(static_cast<char>(sentence[i])))
+        if (std::isdigit(static_cast<unsigned char>(sentence[i])))
         {
             const std::string::size_type start = i;
 
-            while (i < sentence.size() && std::isdigit(static_cast<char>(sentence[i])))
+            while (i < sentence.size() && std::isdigit(static_cast<unsigned char>(sentence[i])))
                 i++;
             const std::string number      = sentence.substr(start, i - start);
             const std::string incremented = add_strings(number);

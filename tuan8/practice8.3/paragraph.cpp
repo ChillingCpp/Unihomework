@@ -2,15 +2,18 @@
 
 void read_paragraph()
 {
-    char        pv = '\n', c = getchar();
+    char        pv = '\n', c = std::getchar();
     std::string s;
     while (true)
     {
+        if (c == EOF)
+            break;
         s.push_back(c);
         if (pv == '.' && c == '\n')
             break;
-        pv = c;
-        c  = getchar();
+        if (!isspace(pv))
+            pv = c;
+        c = std::getchar();
     }
     std::cout << '\n' << s << '\n';
 }
