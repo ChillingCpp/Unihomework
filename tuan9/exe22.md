@@ -118,7 +118,7 @@ otherwise, where `n` is the value of `widget`. You are not allowed to use the `i
 **Đáp án:**
 
 ```c
-printf("%d widget%s\n", widget, widget == 1 ? "" : "s");
+printf("%d widget%s\n", widget,  widget == 1 ? "" : "s");
 ```
 
 ## Exercise 7
