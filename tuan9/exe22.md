@@ -321,15 +321,16 @@ int line_length(const char* filename, int n)
         return 0;
 
     std::string line;
-    int current = 1;
+    int cur=0;
 
     while (std::getline(fp, line)) {
-        if (current == n) {
+        cur++;
+        if (cur == n) {
             if (!line.empty() && line.back() == '\r')
                 line.pop_back();
             return (int)line.size();
         }
-        ++current;
+        
     }
 
     return 0;
